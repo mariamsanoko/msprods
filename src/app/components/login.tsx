@@ -1,12 +1,16 @@
-import React from 'react';
+'use client';
 
-const login = () => {
-    return (
-        <div>
-            <h1>Login Page</h1>
-            {/* Add your login form or buttons here */}
-        </div>
-    );
-};
+import { signIn } from "next-auth/react";
 
-export default Login;
+
+const Login = () => {
+  return (
+    <div>
+        <button onClick={() => signIn('github', { redirectTo:"/dashboard"})}>Sign in with GitHub</button>
+        <button onClick={() => signIn('google', { redirectTo:"/dashboard"})}>Sign in with Google</button>
+    </div>
+    
+  )
+}
+
+export default Login
