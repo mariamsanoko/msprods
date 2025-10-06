@@ -2,10 +2,13 @@
   "name": "msprods",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mariamsanoko.github.io/msprods",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
