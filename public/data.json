@@ -69,8 +69,8 @@
     },
     {
       "id": "02",
-      "thumb_src": "images/suit-1.jpg",
-      "thumb_alt": "watch-image",
+      "thumb_src": "images/chatGPT.png",
+      "thumb_alt": "chatgpt-image",
       "images": [
         {
           "src": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
@@ -89,13 +89,13 @@
           "alt": "fourth_image"
         }
       ],
-      "color": "Black",
+      "color": "chatGPT Plus",
       "colors": ["black", "green", "white"],
       "title": "Pink Blouse",
-      "price": 1490,
+      "price": 21.90,
       "rating": 5,
       "reviews": 117,
-      "description": "That’s the main thing people are controlled by! Thoughts- their perception of themselves!",
+      "description": "chatGPT the main thing people are controlled by! Thoughts- their perception of themselves!",
       "full_description": "The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming `Charcoal Gray` limited release.",
       "features": [
         "Multiple strap configuration",
@@ -129,8 +129,8 @@
     },
     {
       "id": "03",
-      "thumb_src": "images/suit-2.jpg",
-      "thumb_alt": "iMac-image",
+      "thumb_src": "images/no-code.png",
+      "thumb_alt": "nocode-image",
       "images": [
         {
           "src": "https://images.unsplash.com/photo-1567790350645-dbc1486a89c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80",
@@ -149,9 +149,9 @@
           "alt": "fourth_image"
         }
       ],
-      "color": "Yellow",
+      "color": "Airtable",
       "colors": ["SpaceGray"],
-      "title": "Premium Suit",
+      "title": "Airtable Premium formation",
       "description": "There’s nothing I really wanted to do in life that I wasn’t able to get good at.",
       "price": 1399,
       "size": "Large",
