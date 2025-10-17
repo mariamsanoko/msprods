@@ -14,7 +14,7 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <a className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 " aria-current="page" href="/">
-                All Components
+                Nos Formations
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -28,8 +28,8 @@ const Navbar = () => {
               </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 " aria-current="page" href="https://www.creative-tim.com/learning-lab/astro/overview/astro-ecommerce">
-                Documentation
+              <a className="nav-link text-dark font-weight-bold d-flex align-items-center me-2 " aria-current="page" href="https://www.mariamsanoko.fr/">
+                MS I.A & No-Code
               </a>
             </li>
             <li className="nav-item">
