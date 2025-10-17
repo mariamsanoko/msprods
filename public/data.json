@@ -172,12 +172,12 @@
     },
     {
       "id": "04",
-      "thumb_src": "images/suit-5.jpg",
-      "thumb_alt": "iPhone_thumb",
+      "thumb_src": "images/figma.png",
+      "thumb_alt": "figma_thumb",
       "color": "Blue",
-      "title": "iPhone",
-      "description": "That’s the main thing people are controlled by! Thoughts- their perception of themselves!",
-      "price": 1599,
+      "title": "Figma Masterclass",
+      "description": "Masterclass Figma the main thing people are controlled by! Thoughts- their perception of themselves!",
+      "price": 15.99,
       "size": "Small",
       "sizes": {
         "XS": 3,
