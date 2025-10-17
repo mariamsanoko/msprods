@@ -2,8 +2,8 @@
   "products": [
     {
       "id": "01",
-      "thumb_src": "images/suit-3.jpg",
-      "thumb_alt": "watch-image",
+      "thumb_src": "images/powerAPPS.webp",
+      "thumb_alt": "power-image",
       "images": [
         {
           "src": "https://images.unsplash.com/photo-1611930021592-a8cfd5319ceb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
