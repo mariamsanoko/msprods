@@ -2,7 +2,7 @@
   "products": [
     {
       "id": "01",
-      "thumb_src": "/images/suit-3.jpg",
+      "thumb_src": "../images/suit-3.jpg",
       "thumb_alt": "watch-image",
       "images": [
         {
