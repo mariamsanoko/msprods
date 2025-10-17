@@ -3,7 +3,7 @@
     {
       "id": "01",
       "thumb_src": "images/powerAPPS.webp",
-      "thumb_alt": "power-image",
+      "thumb_alt": "power_apps_image",
       "images": [
         {
           "src": "https://images.unsplash.com/photo-1611930021592-a8cfd5319ceb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
@@ -22,7 +22,7 @@
           "alt": "fourth_image"
         }
       ],
-      "color": "8 colors",
+      "color": "3 Niveaux",
       "colors": [
         "red", 
         "blue", 
