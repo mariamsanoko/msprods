@@ -3,651 +3,1075 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS D365 French Academy - Deviens Expert(e) en Automatisation Sans Coder</title>
+    <meta name="description" content="MS D365 French Academy : formation en ligne no-code pour maîtriser Power Platform, Dynamics 365 CRM, Power Automate et Copilot.">
+    <title>MS D365 French Academy - Formation Microsoft Power Platform</title>
     <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #64748b;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+            --surface-blue: #eff6ff;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #f97316;
+            --success: #16a34a;
+            --border: #e2e8f0;
+            --shadow-sm: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 24px 70px rgba(15, 23, 42, 0.16);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--ink);
+            background: var(--surface-soft);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 15% 5%, rgba(37, 99, 235, 0.16), transparent 32rem),
+                radial-gradient(circle at 90% 10%, rgba(124, 58, 237, 0.14), transparent 34rem),
+                linear-gradient(180deg, #ffffff 0%, #f8fafc 42%, #eef2ff 100%);
+        }
+
+        a {
+            color: inherit;
         }
 
         .container {
-            max-width: 1200px;
+            width: min(1180px, calc(100% - 40px));
             margin: 0 auto;
-            padding: 0 20px;
+        }
+
+        .section {
+            padding: 96px 0;
+        }
+
+        .section-header {
+            max-width: 760px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1px solid rgba(37, 99, 235, 0.18);
+            border-radius: 999px;
+            color: var(--primary-dark);
+            background: rgba(239, 246, 255, 0.86);
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+        }
+
+        h1 {
+            margin-top: 22px;
+            font-size: clamp(2.75rem, 6vw, 5.8rem);
+        }
+
+        h2 {
+            margin-top: 16px;
+            font-size: clamp(2.1rem, 4vw, 3.7rem);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            color: var(--muted);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 15px 24px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 16px 35px rgba(37, 99, 235, 0.28);
+            font-weight: 900;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover,
+        .btn:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 48px rgba(37, 99, 235, 0.36);
+        }
+
+        .btn-secondary {
+            color: var(--ink);
+            background: #fff;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #ef4444);
+            box-shadow: 0 18px 40px rgba(249, 115, 22, 0.32);
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.72);
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 78px;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            font-weight: 950;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 14px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #475569;
+        }
+
+        .nav-links a {
+            text-decoration: none;
         }
 
         .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-            color: white;
-            padding: 80px 0;
-            text-align: center;
+            padding: 84px 0 72px;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+            align-items: center;
+            gap: 56px;
         }
 
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
+        .hero-copy .lead {
+            max-width: 690px;
+            margin: 24px 0 32px;
+            font-size: clamp(1.08rem, 2vw, 1.35rem);
+            color: #475569;
         }
 
-        .video-container {
-            background: white;
-            padding: 60px 0;
-            text-align: center;
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 32px;
         }
 
-        .video-placeholder {
-            width: 100%;
-            max-width: 800px;
-            height: 450px;
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 15px;
+        .trust-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+            color: #475569;
+            font-size: 0.93rem;
+            font-weight: 800;
+        }
+
+        .academy-preview {
+            position: relative;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 34px;
+            background: rgba(255, 255, 255, 0.64);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(18px);
+        }
+
+        .preview-card {
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            background: var(--surface);
+        }
+
+        .preview-topbar {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            gap: 8px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
         }
 
-        .video-placeholder:hover {
-            border-color: #667eea;
-            background: #f0f2ff;
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+
+        .dot:nth-child(2) { background: #f59e0b; }
+        .dot:nth-child(3) { background: #22c55e; }
+
+        .preview-body {
+            padding: 26px;
+        }
+
+        .lesson-player {
+            position: relative;
+            display: grid;
+            min-height: 230px;
+            place-items: center;
+            border-radius: 22px;
+            color: #fff;
+            background:
+                linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.9)),
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.38), transparent 18rem);
         }
 
         .play-button {
-            width: 80px;
-            height: 80px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .problems {
-            background: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .problems h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-
-        .problem-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .problem-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .problem-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            width: 76px;
+            height: 76px;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.42);
             border-radius: 50%;
-            display: flex;
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: inset 0 0 0 10px rgba(255,255,255,0.08);
+            font-size: 1.8rem;
+        }
+
+        .lesson-tag {
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.18);
+            font-size: 0.78rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .progress-panel {
+            display: grid;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .progress-item {
+            display: grid;
+            grid-template-columns: 44px 1fr auto;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
+            gap: 14px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+        }
+
+        .progress-icon {
+            display: grid;
+            width: 44px;
+            height: 44px;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--surface-blue);
+            color: var(--primary);
+        }
+
+        .progress-label strong {
+            display: block;
+        }
+
+        .progress-label span {
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .progress-percent {
+            color: var(--success);
+            font-weight: 950;
+        }
+
+        .stats-band {
+            margin-top: 42px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.82);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat {
+            padding: 26px;
+            text-align: center;
+        }
+
+        .stat + .stat {
+            border-left: 1px solid var(--border);
+        }
+
+        .stat-number {
+            display: block;
+            color: var(--primary-dark);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 950;
+            letter-spacing: -0.06em;
+        }
+
+        .stat span:last-child {
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: auto -25% -45% 45%;
+            height: 170px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.07);
+        }
+
+        .icon {
+            display: grid;
+            width: 56px;
+            height: 56px;
             margin-bottom: 20px;
+            place-items: center;
+            border-radius: 18px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: 1.4rem;
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.2);
         }
 
-        .solution {
-            background: white;
-            padding: 80px 0;
+        .card h3,
+        .module h3,
+        .pricing-card h3 {
+            margin-bottom: 12px;
         }
 
-        .solution h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #2c3e50;
+        .learning-path {
+            background: var(--ink);
+            color: #fff;
         }
 
-        .solution-features {
+        .learning-path p,
+        .learning-path .section-header p {
+            color: #cbd5e1;
+        }
+
+        .learning-path .eyebrow {
+            color: #bfdbfe;
+            background: rgba(37, 99, 235, 0.16);
+            border-color: rgba(147, 197, 253, 0.24);
+        }
+
+        .path-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 32px;
+            align-items: start;
         }
 
-        .feature {
-            text-align: center;
-            padding: 20px;
+        .path-panel {
+            padding: 34px;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.92));
+            box-shadow: 0 24px 70px rgba(0,0,0,0.32);
         }
 
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
+        .path-panel ul {
+            display: grid;
+            gap: 16px;
+            margin-top: 22px;
+            list-style: none;
+        }
+
+        .path-panel li {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 20px;
+            gap: 12px;
+            color: #e2e8f0;
         }
 
-        .modules {
-            background: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .modules h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-
-        .module-list {
+        .modules-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            gap: 16px;
         }
 
         .module {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #667eea;
-        }
-
-        .module h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .module-duration {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 5px 15px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid rgba(148, 163, 184, 0.22);
             border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .module-number {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            place-items: center;
+            border-radius: 16px;
+            background: rgba(37, 99, 235, 0.24);
+            color: #bfdbfe;
+            font-weight: 950;
+        }
+
+        .duration {
+            padding: 7px 12px;
+            border-radius: 999px;
+            color: #dbeafe;
+            background: rgba(37, 99, 235, 0.18);
+            font-size: 0.82rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .experience {
+            background: #fff;
+        }
+
+        .feature-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 24px;
+            border-radius: 22px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+        }
+
+        .feature strong {
+            display: block;
+            margin: 14px 0 8px;
+            font-size: 1.08rem;
         }
 
         .testimonials {
-            background: white;
-            padding: 80px 0;
-        }
-
-        .testimonials h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
         }
 
         .testimonial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
         }
 
         .testimonial {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            position: relative;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        .testimonial::before {
-            content: '"';
-            font-size: 4rem;
-            color: #667eea;
-            position: absolute;
-            top: -10px;
-            left: 20px;
+        .stars {
+            margin-bottom: 16px;
+            color: #f59e0b;
+            letter-spacing: 2px;
         }
 
-        .testimonial-author {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #667eea;
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+            color: var(--ink);
+            font-weight: 900;
+        }
+
+        .avatar {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 50%;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
         }
 
         .pricing {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .pricing h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            background: var(--surface-soft);
         }
 
         .pricing-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            align-items: stretch;
         }
 
         .pricing-card {
-            background: white;
-            color: #333;
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             position: relative;
-            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        .pricing-card:hover {
-            transform: translateY(-10px);
+        .pricing-card.popular {
+            border: 2px solid rgba(37, 99, 235, 0.42);
+            transform: translateY(-14px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .popular {
-            border: 3px solid #ff6b6b;
-        }
-
-        .popular::before {
-            content: 'POPULAIRE';
-            background: #ff6b6b;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 20px;
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            font-weight: bold;
+        .badge {
+            width: fit-content;
+            margin-bottom: 16px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), #ef4444);
+            font-size: 0.78rem;
+            font-weight: 950;
+            text-transform: uppercase;
         }
 
         .price {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 20px 0;
+            margin: 18px 0 10px;
+            font-size: 3.6rem;
+            font-weight: 950;
+            letter-spacing: -0.08em;
         }
 
-        .cta {
-            background: #2c3e50;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
+        .price small {
+            color: var(--muted);
+            font-size: 1rem;
+            letter-spacing: 0;
+            font-weight: 800;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 20px 40px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .pricing-card ul {
+            display: grid;
+            gap: 12px;
+            margin: 24px 0 30px;
+            padding: 0;
+            list-style: none;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        .pricing-card li {
+            display: flex;
+            gap: 10px;
+            color: #475569;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .pricing-card .btn {
+            margin-top: auto;
         }
 
         .guarantee {
-            background: #e8f5e8;
-            color: #2e7d32;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            max-width: 780px;
+            margin: 34px auto 0;
+            padding: 18px;
+            border: 1px solid rgba(22, 163, 74, 0.18);
+            border-radius: 18px;
+            color: #166534;
+            background: #f0fdf4;
+            font-weight: 900;
             text-align: center;
-            border: 2px solid #4caf50;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+        .final-cta {
+            padding: 86px 0;
+            color: #fff;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(255,255,255,0.18), transparent 28rem),
+                linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            text-align: center;
+        }
 
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
+        .final-cta p {
+            max-width: 720px;
+            margin: 18px auto 28px;
+            color: #e0e7ff;
+            font-size: 1.18rem;
+        }
 
-            .container {
-                padding: 0 15px;
-            }
+        .security-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .security-row span {
+            padding: 9px 12px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            font-weight: 800;
         }
 
         .floating-cta {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            animation: pulse 2s infinite;
+            right: 22px;
+            bottom: 22px;
+            z-index: 30;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .floating-cta .btn {
+            min-height: 50px;
+            padding: 13px 18px;
         }
 
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 40px 0;
-            text-align: center;
+        @media (max-width: 980px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-grid,
+            .path-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-grid,
+            .testimonial-grid,
+            .pricing-cards,
+            .feature-strip {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat:nth-child(odd) {
+                border-left: 0;
+            }
+
+            .stat:nth-child(n + 3) {
+                border-top: 1px solid var(--border);
+            }
         }
 
-        .stat {
-            color: white;
-        }
+        @media (max-width: 680px) {
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-        }
+            .section {
+                padding: 68px 0;
+            }
 
-        .accessibility-badge {
-            background: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 10px;
-            font-size: 0.9rem;
+            .hero {
+                padding-top: 56px;
+            }
+
+            .hero-actions,
+            .hero-actions .btn,
+            .card-grid,
+            .testimonial-grid,
+            .pricing-cards,
+            .feature-strip,
+            .stats-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .stat,
+            .stat + .stat,
+            .stat:nth-child(n + 3) {
+                border-left: 0;
+                border-top: 1px solid var(--border);
+            }
+
+            .stat:first-child {
+                border-top: 0;
+            }
+
+            .module {
+                grid-template-columns: 1fr;
+            }
+
+            .duration {
+                width: fit-content;
+            }
+
+            .academy-preview {
+                padding: 10px;
+                border-radius: 24px;
+            }
+
+            .preview-body {
+                padding: 18px;
+            }
+
+            .floating-cta {
+                right: 14px;
+                bottom: 14px;
+            }
         }
     </style>
 </head>
 <body>
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <h1>Deviens expert(e) en automatisation et CRM sans coder</h1>
-        <p class="subtitle">Grâce à la MS D365 French Academy et la puissance du No-Code</p>
-
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-number">15+</span>
-                <span>Modules</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">40h</span>
-                <span>de Formation</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span>Pratique</span>
-            </div>
-        </div>
-
-        <div class="accessibility-badge">🌐 Formation Accessible à Tous</div>
-        <div class="accessibility-badge">♿ Compatible Handicaps</div>
-        <div class="accessibility-badge">🎓 Certifiante SCORM</div>
+<header class="site-header" aria-label="Navigation principale">
+    <div class="container nav">
+        <a class="brand" href="#top" aria-label="MS D365 French Academy">
+            <span class="brand-mark">MS</span>
+            <span>D365 French Academy</span>
+        </a>
+        <nav class="nav-links" aria-label="Sections du site">
+            <a href="#programme">Programme</a>
+            <a href="#experience">Expérience</a>
+            <a href="#avis">Avis</a>
+            <a href="#tarifs">Tarifs</a>
+        </nav>
+        <a class="btn btn-secondary" href="#tarifs">S'inscrire</a>
     </div>
-</section>
+</header>
 
-<!-- Video Section -->
-<section class="video-container">
-    <div class="container">
-        <h2>Découvre ta formation en 2 minutes</h2>
-        <div class="video-placeholder" onclick="playVideo()">
-            <div class="play-button">▶</div>
-        </div>
-        <p style="margin-top: 20px; color: #666;">Clique pour voir la présentation complète de l'académie</p>
-    </div>
-</section>
-
-<!-- Problems Section -->
-<section class="problems">
-    <div class="container">
-        <h2>Tu rencontres ces défis au quotidien ?</h2>
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-icon">⏱️</div>
-                <h3>Perte de temps énorme</h3>
-                <p>Tu passes des heures sur des tâches répétitives qui pourraient être automatisées en quelques clics.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">🤔</div>
-                <h3>Outils Microsoft incompréhensibles</h3>
-                <p>Power Platform, D365, les outils existent mais personne ne t'explique comment les maîtriser vraiment.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">💰</div>
-                <h3>Formations hors de prix</h3>
-                <p>Les certifications Microsoft coûtent une fortune et ne sont pas accessibles à tous les budgets.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">🚫</div>
-                <h3>Pas de compétences techniques</h3>
-                <p>Tu n'es pas développeur(se) mais tu veux quand même créer des solutions puissantes.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">📚</div>
-                <h3>Contenu éparpillé</h3>
-                <p>Les ressources sont partout, en anglais, et tu ne sais pas par où commencer.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Solution Section -->
-<section class="solution">
-    <div class="container">
-        <h2>Notre Approche Révolutionnaire</h2>
-        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px; color: #666;">
-            Une formation 100% française, accessible, et orientée pratique
-        </p>
-
-        <div class="solution-features">
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>No-Code Total</h3>
-                <p>Crée des solutions complexes sans écrire une seule ligne de code</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🌍</div>
-                <h3>Accessible à Tous</h3>
-                <p>Compatible avec les handicaps, sous-titres, tarification solidaire</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🏆</div>
-                <h3>Certifiante</h3>
-                <p>Compatible SCORM, reconnue par les entreprises</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🇫🇷</div>
-                <h3>100% Français</h3>
-                <p>Enfin du contenu de qualité dans notre langue</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Modules Section -->
-<section class="modules">
-    <div class="container">
-        <h2>Programme Complet - 15 Modules</h2>
-        <div class="module-list">
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 1 : Bases Power Platform</h3>
-                <p>Vue d'ensemble, licences, premiers pas dans l'écosystème Microsoft</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">4h</div>
-                <h3>Module 2 : Power Apps Débutant</h3>
-                <p>Créer ta première application sans code, interfaces intuitives</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 3 : Power Automate Essentiel</h3>
-                <p>Automatiser tes workflows, connecter tes outils</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">2h</div>
-                <h3>Module 4 : Power BI Visualisation</h3>
-                <p>Créer des tableaux de bord percutants</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 5 : Dynamics 365 CRM</h3>
-                <p>Gérer tes contacts et prospects efficacement</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">2h</div>
-                <h3>Module 6 : Copilot Integration</h3>
-                <p>L'IA au service de tes processus</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">4h</div>
-                <h3>Modules 7-10 : Projets Pratiques</h3>
-                <p>CRM complet, système de tickets, e-commerce, RH</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Modules 11-15 : Expertise Avancée</h3>
-                <p>Optimisation, sécurité, déploiement, maintenance</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials">
-    <div class="container">
-        <h2>Ce que disent nos bêta-testeurs</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial">
-                <p>Enfin une formation en français qui va à l'essentiel ! J'ai automatisé tout mon processus commercial en 2 semaines.</p>
-                <div class="testimonial-author">- Marie, Consultante Marketing</div>
-            </div>
-            <div class="testimonial">
-                <p>La tarification solidaire m'a permis d'accéder à une formation de qualité. Le contenu est top et très pratique.</p>
-                <div class="testimonial-author">- Thomas, Étudiant</div>
-            </div>
-            <div class="testimonial">
-                <p>Accessible avec mon handicap visuel grâce aux sous-titres et à l'audio descriptif. Bravo pour l'inclusivité !</p>
-                <div class="testimonial-author">- Sophie, Analyste</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Pricing Section -->
-<section class="pricing">
-    <div class="container">
-        <h2>Choisis ton Parcours</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 30px;">Tarification solidaire - Accessible à tous les budgets</p>
-
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3>Accès Essentiel</h3>
-                <div class="price">29€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ 5 premiers modules</li>
-                    <li>✅ Communauté Discord</li>
-                    <li>✅ Certificat de participation</li>
-                    <li>✅ Accès à vie</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('essentiel')">Commencer</a>
+<main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <span class="eyebrow">🎓 Formation en ligne Microsoft & No-Code</span>
+                <h1 id="hero-title">Maîtrise Power Platform et Dynamics 365 comme dans une vraie académie.</h1>
+                <p class="lead">Un parcours premium, guidé et 100% pratique pour automatiser ton quotidien, créer des apps métier et piloter un CRM moderne sans écrire une ligne de code.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-accent" href="#tarifs">🚀 Choisir mon parcours</a>
+                    <a class="btn btn-secondary" href="#programme">Voir le programme</a>
+                </div>
+                <div class="trust-row" aria-label="Garanties de la formation">
+                    <span class="pill">♿ Accessible & sous-titrée</span>
+                    <span class="pill">🏆 Certificat SCORM</span>
+                    <span class="pill">🇫🇷 Support en français</span>
+                </div>
             </div>
 
-            <div class="pricing-card popular">
-                <h3>Formation Complète</h3>
-                <div class="price">79€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ 15 modules complets</li>
-                    <li>✅ Projets pratiques</li>
-                    <li>✅ Support prioritaire</li>
-                    <li>✅ Certification SCORM</li>
-                    <li>✅ Bonus PDF (200 pages)</li>
-                    <li>✅ Accès à vie + mises à jour</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('complete')">Je démarre aujourd'hui</a>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Coaching Premium</h3>
-                <div class="price">199€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ Formation complète</li>
-                    <li>✅ 3 sessions coaching 1:1</li>
-                    <li>✅ Projet personnalisé</li>
-                    <li>✅ Support WhatsApp</li>
-                    <li>✅ Garantie résultat</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('premium')">Réserver ma place</a>
+            <div class="academy-preview" aria-label="Aperçu de la plateforme de formation">
+                <div class="preview-card">
+                    <div class="preview-topbar" aria-hidden="true">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="preview-body">
+                        <div class="lesson-player" onclick="playVideo()" role="button" tabindex="0" aria-label="Lire la vidéo de présentation">
+                            <span class="lesson-tag">Aperçu module 1</span>
+                            <span class="play-button">▶</span>
+                        </div>
+                        <div class="progress-panel">
+                            <div class="progress-item">
+                                <span class="progress-icon">⚡</span>
+                                <span class="progress-label"><strong>Workflow Power Automate</strong><span>Cas client guidé pas à pas</span></span>
+                                <span class="progress-percent">82%</span>
+                            </div>
+                            <div class="progress-item">
+                                <span class="progress-icon">📊</span>
+                                <span class="progress-label"><strong>Dashboard Power BI</strong><span>Exercice interactif inclus</span></span>
+                                <span class="progress-percent">45%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="guarantee">
-            <h3>🛡️ Garantie 7 jours satisfait ou remboursé</h3>
-            <p>Si tu n'es pas satisfait(e), nous te remboursons intégralement sans question.</p>
+        <div class="container stats-band" aria-label="Chiffres clés">
+            <div class="stats-grid">
+                <div class="stat"><span class="stat-number">15</span><span>modules structurés</span></div>
+                <div class="stat"><span class="stat-number">40h</span><span>de contenu pratique</span></div>
+                <div class="stat"><span class="stat-number">8</span><span>projets métier</span></div>
+                <div class="stat"><span class="stat-number">100%</span><span>orienté action</span></div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CTA Section -->
-<section class="cta">
-    <div class="container">
-        <h2>Prêt(e) à transformer ta carrière ?</h2>
-        <p style="font-size: 1.2rem; margin: 20px 0;">Rejoins dès maintenant les centaines d'apprenants qui maîtrisent déjà l'automatisation</p>
-        <a href="#" class="btn btn-primary" onclick="scrollToPricing()">Choisir mon parcours</a>
-
-        <div style="margin-top: 40px; font-size: 0.9rem; opacity: 0.8;">
-            <p>🔒 Paiement sécurisé Stripe & PayPal</p>
-            <p>📧 Accès immédiat par email</p>
-            <p>🌍 Compatible tous appareils</p>
+    <section class="section" aria-labelledby="benefits-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Pourquoi cette académie ?</span>
+                <h2 id="benefits-title">Un site de formation conçu pour apprendre, pratiquer et progresser.</h2>
+                <p>Fini les ressources dispersées : tu suis un parcours clair avec vidéos, exercices, modèles prêts à l'emploi et support communautaire.</p>
+            </div>
+            <div class="card-grid">
+                <article class="card">
+                    <span class="icon">🧭</span>
+                    <h3>Parcours guidé</h3>
+                    <p>Chaque module suit une progression logique : comprendre, reproduire, adapter à ton contexte professionnel.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🛠️</span>
+                    <h3>Projets réels</h3>
+                    <p>CRM commercial, système de tickets, automatisations RH et tableaux de bord : tu construis un portfolio concret.</p>
+                </article>
+                <article class="card">
+                    <span class="icon">🤝</span>
+                    <h3>Accompagnement</h3>
+                    <p>Accès communauté, sessions de questions-réponses et coaching premium pour débloquer tes cas complexes.</p>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Floating CTA -->
+    <section class="section learning-path" id="programme" aria-labelledby="programme-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Programme complet</span>
+                <h2 id="programme-title">De débutant à créateur de solutions Microsoft.</h2>
+                <p>Un cursus condensé pour apprendre les fondamentaux puis livrer des projets métier utilisables en entreprise.</p>
+            </div>
+            <div class="path-grid">
+                <aside class="path-panel">
+                    <h3>Ce que tu sauras faire</h3>
+                    <ul>
+                        <li>✅ Créer des applications Power Apps propres et ergonomiques.</li>
+                        <li>✅ Automatiser les tâches répétitives avec Power Automate.</li>
+                        <li>✅ Structurer un CRM Dynamics 365 simple et efficace.</li>
+                        <li>✅ Connecter Copilot et Power BI à tes processus métier.</li>
+                    </ul>
+                </aside>
+                <div class="modules-list">
+                    <article class="module">
+                        <span class="module-number">01</span>
+                        <div><h3>Bases Power Platform</h3><p>Licences, environnement, Dataverse et premiers réflexes professionnels.</p></div>
+                        <span class="duration">3h</span>
+                    </article>
+                    <article class="module">
+                        <span class="module-number">02</span>
+                        <div><h3>Power Apps & interfaces</h3><p>Créer une app métier lisible, responsive et facile à maintenir.</p></div>
+                        <span class="duration">4h</span>
+                    </article>
+                    <article class="module">
+                        <span class="module-number">03</span>
+                        <div><h3>Automatisations essentielles</h3><p>Connecteurs, conditions, notifications, validations et bonnes pratiques.</p></div>
+                        <span class="duration">3h</span>
+                    </article>
+                    <article class="module">
+                        <span class="module-number">04</span>
+                        <div><h3>CRM Dynamics 365 & reporting</h3><p>Pipeline, contacts, opportunités, tableaux de bord et Power BI.</p></div>
+                        <span class="duration">5h</span>
+                    </article>
+                    <article class="module">
+                        <span class="module-number">05</span>
+                        <div><h3>Projets avancés & déploiement</h3><p>Sécurité, documentation, maintenance, Copilot et certification finale.</p></div>
+                        <span class="duration">25h</span>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section experience" id="experience" aria-labelledby="experience-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Expérience d'apprentissage</span>
+                <h2 id="experience-title">Tous les codes d'une plateforme e-learning professionnelle.</h2>
+                <p>Le design met en avant la confiance, la clarté du parcours, l'accessibilité et la conversion vers l'inscription.</p>
+            </div>
+            <div class="feature-strip">
+                <div class="feature"><span class="icon">🎬</span><strong>Vidéos courtes</strong><p>Des leçons digestes, sous-titrées et pensées pour passer vite à la pratique.</p></div>
+                <div class="feature"><span class="icon">📝</span><strong>Quiz & exercices</strong><p>Valide tes acquis à chaque étape avec des défis opérationnels.</p></div>
+                <div class="feature"><span class="icon">📦</span><strong>Templates inclus</strong><p>Modèles, checklists et fichiers de départ pour gagner du temps.</p></div>
+                <div class="feature"><span class="icon">📈</span><strong>Suivi de progression</strong><p>Visualise tes modules terminés et reprends exactement où tu t'es arrêté.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials" id="avis" aria-labelledby="avis-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Avis apprenants</span>
+                <h2 id="avis-title">Ils automatisent déjà leur métier.</h2>
+            </div>
+            <div class="testimonial-grid">
+                <article class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>« Enfin une formation française qui ne se contente pas de théorie. J'ai livré mon premier mini-CRM en deux semaines. »</p>
+                    <div class="author"><span class="avatar">M</span><span>Marie · Consultante marketing</span></div>
+                </article>
+                <article class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>« Les exercices sont concrets et le design du parcours donne envie d'avancer module après module. »</p>
+                    <div class="author"><span class="avatar">T</span><span>Thomas · Étudiant en alternance</span></div>
+                </article>
+                <article class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p>« Sous-titres, structure claire, rythme accessible : je me suis senti accompagnée du début à la fin. »</p>
+                    <div class="author"><span class="avatar">S</span><span>Sophie · Analyste métier</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pricing" id="tarifs" aria-labelledby="pricing-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Tarification solidaire</span>
+                <h2 id="pricing-title">Choisis le niveau d'accompagnement adapté.</h2>
+                <p>Des offres simples pour commencer vite, monter en compétence et obtenir de l'aide quand ton projet l'exige.</p>
+            </div>
+            <div class="pricing-cards">
+                <article class="pricing-card">
+                    <h3>Accès Essentiel</h3>
+                    <p>Pour découvrir les bases et lancer ton premier projet.</p>
+                    <div class="price">29€ <small>TTC</small></div>
+                    <ul>
+                        <li>✅ 5 premiers modules</li>
+                        <li>✅ Communauté apprenants</li>
+                        <li>✅ Certificat de participation</li>
+                        <li>✅ Accès à vie</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" onclick="selectPlan('essentiel')">Commencer</a>
+                </article>
+                <article class="pricing-card popular">
+                    <span class="badge">Le plus choisi</span>
+                    <h3>Formation Complète</h3>
+                    <p>Le parcours intégral avec projets pratiques et certification.</p>
+                    <div class="price">79€ <small>TTC</small></div>
+                    <ul>
+                        <li>✅ 15 modules complets</li>
+                        <li>✅ 8 projets métier guidés</li>
+                        <li>✅ Support prioritaire</li>
+                        <li>✅ Certification SCORM</li>
+                        <li>✅ Bonus PDF et templates</li>
+                        <li>✅ Mises à jour incluses</li>
+                    </ul>
+                    <a href="#" class="btn btn-accent" onclick="selectPlan('complete')">Je démarre aujourd'hui</a>
+                </article>
+                <article class="pricing-card">
+                    <h3>Coaching Premium</h3>
+                    <p>Pour être accompagné sur un cas réel d'entreprise.</p>
+                    <div class="price">199€ <small>TTC</small></div>
+                    <ul>
+                        <li>✅ Formation complète</li>
+                        <li>✅ 3 sessions coaching 1:1</li>
+                        <li>✅ Audit de ton projet</li>
+                        <li>✅ Support prioritaire direct</li>
+                        <li>✅ Plan d'action personnalisé</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" onclick="selectPlan('premium')">Réserver ma place</a>
+                </article>
+            </div>
+            <div class="guarantee">🛡️ Garantie 7 jours satisfait ou remboursé — accès immédiat après inscription.</div>
+        </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="final-title">
+        <div class="container">
+            <span class="eyebrow">Prêt à apprendre autrement ?</span>
+            <h2 id="final-title">Transforme tes idées métier en solutions Microsoft concrètes.</h2>
+            <p>Rejoins une académie en ligne claire, moderne et accessible pour passer du « je ne sais pas coder » au « je peux automatiser ça ».</p>
+            <a href="#tarifs" class="btn btn-accent">Choisir mon parcours</a>
+            <div class="security-row" aria-label="Informations de confiance">
+                <span>🔒 Paiement sécurisé</span>
+                <span>📧 Accès immédiat</span>
+                <span>🌍 Compatible mobile, tablette et desktop</span>
+            </div>
+        </div>
+    </section>
+</main>
+
 <div class="floating-cta">
-    <a href="#" class="btn" onclick="scrollToPricing()">🚀 Commencer</a>
+    <a href="#tarifs" class="btn btn-accent">🚀 Commencer</a>
 </div>
 
 <script>
@@ -657,745 +1081,37 @@
 
     function selectPlan(plan) {
         const plans = {
-            'essentiel': { price: 29, name: 'Accès Essentiel' },
-            'complete': { price: 79, name: 'Formation Complète' },
-            'premium': { price: 199, name: 'Coaching Premium' }
+            essentiel: { price: 29, name: 'Accès Essentiel' },
+            complete: { price: 79, name: 'Formation Complète' },
+            premium: { price: 199, name: 'Coaching Premium' }
         };
 
         const selectedPlan = plans[plan];
         if (confirm(`Confirmer l'achat : ${selectedPlan.name} - ${selectedPlan.price}€`)) {
-            // Ici tu intégreras Stripe/PayPal + Make.com
             window.location.href = `https://buy.stripe.com/your-payment-link?plan=${plan}`;
         }
     }
 
-    function scrollToPricing() {
-        document.querySelector('.pricing').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Animation d'entrée des éléments
-    window.addEventListener('scroll', function() {
-        const elements = document.querySelectorAll('.problem-card, .module, .testimonial');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
+    const revealElements = document.querySelectorAll('.card, .module, .feature, .testimonial, .pricing-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
             }
         });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach((element) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(24px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
     });
 
-    // Style initial pour les animations
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.problem-card, .module, .testimonial');
-        elements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'all 0.6s ease';
-        });
-    });
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS D365 French Academy - Deviens Expert(e) en Automatisation Sans Coder</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .video-container {
-            background: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            max-width: 800px;
-            height: 450px;
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-placeholder:hover {
-            border-color: #667eea;
-            background: #f0f2ff;
-        }
-
-        .play-button {
-            width: 80px;
-            height: 80px;
-            background: #667eea;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .problems {
-            background: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .problems h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .problem-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .problem-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .solution {
-            background: white;
-            padding: 80px 0;
-        }
-
-        .solution h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #2c3e50;
-        }
-
-        .solution-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 20px;
-        }
-
-        .modules {
-            background: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .modules h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-
-        .module-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .module {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 5px solid #667eea;
-        }
-
-        .module h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .module-duration {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .testimonials {
-            background: white;
-            padding: 80px 0;
-        }
-
-        .testimonials h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            position: relative;
-        }
-
-        .testimonial::before {
-            content: '"';
-            font-size: 4rem;
-            color: #667eea;
-            position: absolute;
-            top: -10px;
-            left: 20px;
-        }
-
-        .testimonial-author {
-            margin-top: 20px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .pricing {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .pricing h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .pricing-card {
-            background: white;
-            color: #333;
-            padding: 40px 30px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .popular {
-            border: 3px solid #ff6b6b;
-        }
-
-        .popular::before {
-            content: 'POPULAIRE';
-            background: #ff6b6b;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 20px;
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #667eea;
-            margin: 20px 0;
-        }
-
-        .cta {
-            background: #2c3e50;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 20px 40px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .guarantee {
-            background: #e8f5e8;
-            color: #2e7d32;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-            text-align: center;
-            border: 2px solid #4caf50;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-        }
-
-        .floating-cta {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .stat {
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: block;
-        }
-
-        .accessibility-badge {
-            background: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 10px;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <h1>Deviens expert(e) en automatisation et CRM sans coder</h1>
-        <p class="subtitle">Grâce à la MS D365 French Academy et la puissance du No-Code</p>
-
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-number">15+</span>
-                <span>Modules</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">40h</span>
-                <span>de Formation</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span>Pratique</span>
-            </div>
-        </div>
-
-        <div class="accessibility-badge">🌐 Formation Accessible à Tous</div>
-        <div class="accessibility-badge">♿ Compatible Handicaps</div>
-        <div class="accessibility-badge">🎓 Certifiante SCORM</div>
-    </div>
-</section>
-
-<!-- Video Section -->
-<section class="video-container">
-    <div class="container">
-        <h2>Découvre ta formation en 2 minutes</h2>
-        <div class="video-placeholder" onclick="playVideo()">
-            <div class="play-button">▶</div>
-        </div>
-        <p style="margin-top: 20px; color: #666;">Clique pour voir la présentation complète de l'académie</p>
-    </div>
-</section>
-
-<!-- Problems Section -->
-<section class="problems">
-    <div class="container">
-        <h2>Tu rencontres ces défis au quotidien ?</h2>
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-icon">⏱️</div>
-                <h3>Perte de temps énorme</h3>
-                <p>Tu passes des heures sur des tâches répétitives qui pourraient être automatisées en quelques clics.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">🤔</div>
-                <h3>Outils Microsoft incompréhensibles</h3>
-                <p>Power Platform, D365, les outils existent mais personne ne t'explique comment les maîtriser vraiment.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">💰</div>
-                <h3>Formations hors de prix</h3>
-                <p>Les certifications Microsoft coûtent une fortune et ne sont pas accessibles à tous les budgets.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">🚫</div>
-                <h3>Pas de compétences techniques</h3>
-                <p>Tu n'es pas développeur(se) mais tu veux quand même créer des solutions puissantes.</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">📚</div>
-                <h3>Contenu éparpillé</h3>
-                <p>Les ressources sont partout, en anglais, et tu ne sais pas par où commencer.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Solution Section -->
-<section class="solution">
-    <div class="container">
-        <h2>Notre Approche Révolutionnaire</h2>
-        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px; color: #666;">
-            Une formation 100% française, accessible, et orientée pratique
-        </p>
-
-        <div class="solution-features">
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>No-Code Total</h3>
-                <p>Crée des solutions complexes sans écrire une seule ligne de code</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🌍</div>
-                <h3>Accessible à Tous</h3>
-                <p>Compatible avec les handicaps, sous-titres, tarification solidaire</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🏆</div>
-                <h3>Certifiante</h3>
-                <p>Compatible SCORM, reconnue par les entreprises</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🇫🇷</div>
-                <h3>100% Français</h3>
-                <p>Enfin du contenu de qualité dans notre langue</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Modules Section -->
-<section class="modules">
-    <div class="container">
-        <h2>Programme Complet - 15 Modules</h2>
-        <div class="module-list">
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 1 : Bases Power Platform</h3>
-                <p>Vue d'ensemble, licences, premiers pas dans l'écosystème Microsoft</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">4h</div>
-                <h3>Module 2 : Power Apps Débutant</h3>
-                <p>Créer ta première application sans code, interfaces intuitives</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 3 : Power Automate Essentiel</h3>
-                <p>Automatiser tes workflows, connecter tes outils</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">2h</div>
-                <h3>Module 4 : Power BI Visualisation</h3>
-                <p>Créer des tableaux de bord percutants</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Module 5 : Dynamics 365 CRM</h3>
-                <p>Gérer tes contacts et prospects efficacement</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">2h</div>
-                <h3>Module 6 : Copilot Integration</h3>
-                <p>L'IA au service de tes processus</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">4h</div>
-                <h3>Modules 7-10 : Projets Pratiques</h3>
-                <p>CRM complet, système de tickets, e-commerce, RH</p>
-            </div>
-            <div class="module">
-                <div class="module-duration">3h</div>
-                <h3>Modules 11-15 : Expertise Avancée</h3>
-                <p>Optimisation, sécurité, déploiement, maintenance</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials">
-    <div class="container">
-        <h2>Ce que disent nos bêta-testeurs</h2>
-        <div class="testimonial-grid">
-            <div class="testimonial">
-                <p>Enfin une formation en français qui va à l'essentiel ! J'ai automatisé tout mon processus commercial en 2 semaines.</p>
-                <div class="testimonial-author">- Marie, Consultante Marketing</div>
-            </div>
-            <div class="testimonial">
-                <p>La tarification solidaire m'a permis d'accéder à une formation de qualité. Le contenu est top et très pratique.</p>
-                <div class="testimonial-author">- Thomas, Étudiant</div>
-            </div>
-            <div class="testimonial">
-                <p>Accessible avec mon handicap visuel grâce aux sous-titres et à l'audio descriptif. Bravo pour l'inclusivité !</p>
-                <div class="testimonial-author">- Sophie, Analyste</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Pricing Section -->
-<section class="pricing">
-    <div class="container">
-        <h2>Choisis ton Parcours</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 30px;">Tarification solidaire - Accessible à tous les budgets</p>
-
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <h3>Accès Essentiel</h3>
-                <div class="price">29€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ 5 premiers modules</li>
-                    <li>✅ Communauté Discord</li>
-                    <li>✅ Certificat de participation</li>
-                    <li>✅ Accès à vie</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('essentiel')">Commencer</a>
-            </div>
-
-            <div class="pricing-card popular">
-                <h3>Formation Complète</h3>
-                <div class="price">79€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ 15 modules complets</li>
-                    <li>✅ Projets pratiques</li>
-                    <li>✅ Support prioritaire</li>
-                    <li>✅ Certification SCORM</li>
-                    <li>✅ Bonus PDF (200 pages)</li>
-                    <li>✅ Accès à vie + mises à jour</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('complete')">Je démarre aujourd'hui</a>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Coaching Premium</h3>
-                <div class="price">199€</div>
-                <ul style="text-align: left; margin: 20px 0;">
-                    <li>✅ Formation complète</li>
-                    <li>✅ 3 sessions coaching 1:1</li>
-                    <li>✅ Projet personnalisé</li>
-                    <li>✅ Support WhatsApp</li>
-                    <li>✅ Garantie résultat</li>
-                </ul>
-                <a href="#" class="btn" onclick="selectPlan('premium')">Réserver ma place</a>
-            </div>
-        </div>
-
-        <div class="guarantee">
-            <h3>🛡️ Garantie 7 jours satisfait ou remboursé</h3>
-            <p>Si tu n'es pas satisfait(e), nous te remboursons intégralement sans question.</p>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta">
-    <div class="container">
-        <h2>Prêt(e) à transformer ta carrière ?</h2>
-        <p style="font-size: 1.2rem; margin: 20px 0;">Rejoins dès maintenant les centaines d'apprenants qui maîtrisent déjà l'automatisation</p>
-        <a href="#" class="btn btn-primary" onclick="scrollToPricing()">Choisir mon parcours</a>
-
-        <div style="margin-top: 40px; font-size: 0.9rem; opacity: 0.8;">
-            <p>🔒 Paiement sécurisé Stripe & PayPal</p>
-            <p>📧 Accès immédiat par email</p>
-            <p>🌍 Compatible tous appareils</p>
-        </div>
-    </div>
-</section>
-
-<!-- Floating CTA -->
-<div class="floating-cta">
-    <a href="#" class="btn" onclick="scrollToPricing()">🚀 Commencer</a>
-</div>
-
-<script>
-    function playVideo() {
-        alert('Vidéo de présentation - À remplacer par votre vraie vidéo YouTube/Vimeo');
-    }
-
-    function selectPlan(plan) {
-        const plans = {
-            'essentiel': { price: 29, name: 'Accès Essentiel' },
-            'complete': { price: 79, name: 'Formation Complète' },
-            'premium': { price: 199, name: 'Coaching Premium' }
-        };
-
-        const selectedPlan = plans[plan];
-        if (confirm(`Confirmer l'achat : ${selectedPlan.name} - ${selectedPlan.price}€`)) {
-            // Ici tu intégreras Stripe/PayPal + Make.com
-            window.location.href = `https://buy.stripe.com/your-payment-link?plan=${plan}`;
-        }
-    }
-
-    function scrollToPricing() {
-        document.querySelector('.pricing').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Animation d'entrée des éléments
-    window.addEventListener('scroll', function() {
-        const elements = document.querySelectorAll('.problem-card, .module, .testimonial');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    });
-
-    // Style initial pour les animations
-    document.addEventListener('DOMContentLoaded', function() {
-        const elements = document.querySelectorAll('.problem-card, .module, .testimonial');
-        elements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'all 0.6s ease';
-        });
-    });
+    const style = document.createElement('style');
+    style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
+    document.head.appendChild(style);
 </script>
 </body>
 </html>
