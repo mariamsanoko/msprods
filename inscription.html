@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inscription à MS D365 French Academy : choisissez votre formation Microsoft Power Platform, Dynamics 365 ou Power Automate.">
+    <title>Inscription - MS D365 French Academy</title>
+    <style>
+        :root { --ink:#0f172a; --muted:#64748b; --primary:#2563eb; --primary-dark:#1d4ed8; --secondary:#7c3aed; --accent:#f97316; --success:#16a34a; --border:#e2e8f0; --surface:#fff; --soft:#f8fafc; --blue:#eff6ff; --shadow:0 24px 70px rgba(15,23,42,.14); --radius:28px; }
+        *{box-sizing:border-box;margin:0;padding:0} body{font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.6;color:var(--ink);background:linear-gradient(180deg,#fff,#eef2ff)} a{color:inherit}.container{width:min(1120px,calc(100% - 40px));margin:auto}.header{position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(226,232,240,.8);background:rgba(255,255,255,.88);backdrop-filter:blur(18px)}.nav{display:flex;align-items:center;justify-content:space-between;min-height:76px;gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:950;text-decoration:none}.mark{display:grid;width:42px;height:42px;place-items:center;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary))}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 22px;border:0;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--secondary));box-shadow:0 16px 35px rgba(37,99,235,.25);font-weight:900;text-decoration:none;cursor:pointer}.btn-secondary{color:var(--ink);background:#fff;border:1px solid var(--border);box-shadow:0 10px 30px rgba(15,23,42,.08)}.hero{padding:74px 0 36px}.eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;color:var(--primary-dark);background:var(--blue);font-size:.86rem;font-weight:900;text-transform:uppercase}h1{max-width:820px;margin:20px 0;font-size:clamp(2.3rem,5vw,4.8rem);line-height:1.04;letter-spacing:-.05em}.lead{max-width:760px;color:var(--muted);font-size:1.18rem}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start;padding:34px 0 86px}.panel{border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.92);box-shadow:var(--shadow)}.form-panel{padding:30px}.summary{position:sticky;top:100px;padding:28px}.field{display:grid;gap:8px;margin-bottom:18px}label{font-weight:900}input,select,textarea{width:100%;min-height:50px;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:#fff;font:inherit;color:var(--ink)}textarea{min-height:118px;resize:vertical}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 22px}.plan-option{position:relative;padding:16px;border:1px solid var(--border);border-radius:18px;background:var(--soft);cursor:pointer}.plan-option input{position:absolute;opacity:0}.plan-option:has(input:checked){border-color:rgba(37,99,235,.62);background:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.08)}.plan-option strong{display:block}.price{color:var(--primary-dark);font-weight:950}.check{display:flex;gap:10px;align-items:flex-start;margin:18px 0;color:#475569}.summary h2{font-size:1.65rem;letter-spacing:-.03em}.summary-list{display:grid;gap:14px;margin:22px 0;list-style:none}.summary-list li{display:flex;justify-content:space-between;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--border);color:#475569}.summary-list strong{color:var(--ink)}.notice{padding:16px;border-radius:18px;color:#166534;background:#f0fdf4;font-weight:800}.hidden{display:none}.success{margin-top:18px;padding:16px;border-radius:18px;color:#166534;background:#dcfce7;font-weight:900}@media(max-width:900px){.grid,.two,.plans{grid-template-columns:1fr}.summary{position:static}.nav{flex-wrap:wrap}}
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container nav">
+        <a class="brand" href="index.html"><span class="mark">MS</span><span>D365 French Academy</span></a>
+        <a class="btn btn-secondary" href="index.html#formations">Voir les formations</a>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <div class="container">
+            <span class="eyebrow">Inscription sécurisée</span>
+            <h1>Choisis ton parcours et réserve ton accès à la formation.</h1>
+            <p class="lead">Cette page prépare toutes les informations nécessaires avant le paiement ou l'intégration CRM : profil, formation visée, niveau et besoin d'accompagnement.</p>
+        </div>
+    </section>
+    <section class="container grid" aria-label="Formulaire d'inscription">
+        <form class="panel form-panel" id="registration-form">
+            <div class="two">
+                <div class="field"><label for="firstname">Prénom</label><input id="firstname" name="firstname" autocomplete="given-name" required></div>
+                <div class="field"><label for="lastname">Nom</label><input id="lastname" name="lastname" autocomplete="family-name" required></div>
+            </div>
+            <div class="two">
+                <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+                <div class="field"><label for="phone">Téléphone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+            </div>
+            <div class="field">
+                <label for="formation">Formation souhaitée</label>
+                <select id="formation" name="formation" required>
+                    <option value="Power Platform Fondations">Power Platform Fondations</option>
+                    <option value="Power Automate Métier">Power Automate Métier</option>
+                    <option value="Dynamics 365 CRM & Reporting">Dynamics 365 CRM & Reporting</option>
+                    <option value="Parcours complet Microsoft No-Code">Parcours complet Microsoft No-Code</option>
+                </select>
+            </div>
+            <label>Plan d'accès</label>
+            <div class="plans" role="radiogroup" aria-label="Plan d'accès">
+                <label class="plan-option"><input type="radio" name="plan" value="essentiel" data-price="29" checked><strong>Essentiel</strong><span class="price">29€</span></label>
+                <label class="plan-option"><input type="radio" name="plan" value="complete" data-price="79"><strong>Complet</strong><span class="price">79€</span></label>
+                <label class="plan-option"><input type="radio" name="plan" value="premium" data-price="199"><strong>Premium</strong><span class="price">199€</span></label>
+            </div>
+            <div class="two">
+                <div class="field"><label for="level">Niveau actuel</label><select id="level" name="level"><option>Débutant</option><option>Intermédiaire</option><option>Avancé</option></select></div>
+                <div class="field"><label for="start">Démarrage souhaité</label><select id="start" name="start"><option>Immédiatement</option><option>Cette semaine</option><option>Ce mois-ci</option></select></div>
+            </div>
+            <div class="field"><label for="goal">Objectif principal</label><textarea id="goal" name="goal" placeholder="Ex. automatiser mes validations internes, créer un mini CRM, préparer une certification..."></textarea></div>
+            <label class="check"><input type="checkbox" required> <span>J'accepte d'être contacté pour finaliser mon inscription et recevoir les informations d'accès.</span></label>
+            <button class="btn" type="submit">Valider ma pré-inscription</button>
+            <p class="success hidden" id="success-message">Pré-inscription enregistrée côté navigateur. Branchez ici votre CRM, Stripe ou outil d'emailing.</p>
+        </form>
+        <aside class="panel summary" aria-label="Récapitulatif">
+            <span class="eyebrow">Récapitulatif</span>
+            <h2>Ton accès se prépare en 3 étapes.</h2>
+            <ul class="summary-list">
+                <li><span>Formation</span><strong id="summary-formation">Power Platform Fondations</strong></li>
+                <li><span>Plan</span><strong id="summary-plan">Essentiel</strong></li>
+                <li><span>Total TTC</span><strong id="summary-price">29€</strong></li>
+            </ul>
+            <div class="notice">🔒 Aucun paiement n'est capturé sur cette maquette. Le formulaire est prêt pour connecter Stripe, PayPal ou un CRM.</div>
+        </aside>
+    </section>
+</main>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const requestedPlan = params.get('plan');
+    const requestedFormation = params.get('formation');
+    const formationBySlug = {
+        'power-platform': 'Power Platform Fondations',
+        'power-automate': 'Power Automate Métier',
+        'dynamics-365': 'Dynamics 365 CRM & Reporting'
+    };
+
+    if (requestedPlan) {
+        const input = document.querySelector(`input[name="plan"][value="${requestedPlan}"]`);
+        if (input) input.checked = true;
+    }
+
+    const planLabels = { essentiel: 'Essentiel', complete: 'Complet', premium: 'Premium' };
+    const formation = document.querySelector('#formation');
+    if (requestedFormation && formationBySlug[requestedFormation]) {
+        formation.value = formationBySlug[requestedFormation];
+    }
+    const planInputs = document.querySelectorAll('input[name="plan"]');
+    const summaryFormation = document.querySelector('#summary-formation');
+    const summaryPlan = document.querySelector('#summary-plan');
+    const summaryPrice = document.querySelector('#summary-price');
+
+    function updateSummary() {
+        const selectedPlan = document.querySelector('input[name="plan"]:checked');
+        summaryFormation.textContent = formation.value;
+        summaryPlan.textContent = planLabels[selectedPlan.value];
+        summaryPrice.textContent = `${selectedPlan.dataset.price}€`;
+    }
+
+    formation.addEventListener('change', updateSummary);
+    planInputs.forEach((input) => input.addEventListener('change', updateSummary));
+    updateSummary();
+
+    document.querySelector('#registration-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.querySelector('#success-message').classList.remove('hidden');
+        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+</script>
+</body>
+</html>
