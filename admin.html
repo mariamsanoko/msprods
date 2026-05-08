@@ -120,81 +120,24 @@
             <span class="eyebrow">Admin caché</span>
             <h1>Panneau interne</h1>
             <p>Connecté aux pré-inscriptions du site via le stockage local du navigateur. Raccourci depuis l'accueil : Ctrl + Alt + A.</p>
+            <p>Page volontairement non liée dans la navigation publique. Raccourci depuis l'accueil : Ctrl + Alt + A.</p>
             <label for="passcode">Code d'accès démo<input id="passcode" type="password" autocomplete="current-password" placeholder="msadmin2026" required></label>
             <button class="btn" type="submit">Déverrouiller</button>
             <p class="error hidden" id="error">Code incorrect pour cette maquette.</p>
         </form>
     </section>
-
     <section class="admin hidden" id="admin-view">
         <div class="container">
-            <div class="topbar">
-                <div>
-                    <span class="eyebrow">Back-office connecté</span>
-                    <h1>Administration formations</h1>
-                    <p>Les inscriptions envoyées depuis <strong>inscription.html</strong> sont persistées dans ce navigateur et visibles ici.</p>
-                </div>
-                <div class="topbar-actions">
-                    <a class="btn btn-secondary" href="index.html">Voir le site</a>
-                    <button class="btn btn-secondary" id="seed-demo" type="button">Ajouter un exemple</button>
-                    <button class="btn" id="export-csv" type="button">Exporter CSV</button>
-                    <button class="btn btn-danger" id="lock" type="button">Verrouiller</button>
-                </div>
+            <div class="topbar"><div><span class="eyebrow">Back-office</span><h1>Administration formations</h1><p>Suivi démo des inscriptions, formations et contenus à publier.</p></div><button class="btn" id="lock">Verrouiller</button></div>
+            <div class="grid">
+                <article class="panel stat"><span>Pré-inscriptions</span><strong>128</strong><p>+18 cette semaine</p></article>
+                <article class="panel stat"><span>CA potentiel</span><strong>9 842€</strong><p>Paniers non capturés</p></article>
+                <article class="panel stat"><span>Formations</span><strong>3</strong><p>Pages détails en ligne</p></article>
+                <article class="panel stat"><span>Taux complet</span><strong>62%</strong><p>Plan le plus choisi</p></article>
             </div>
-
-            <div class="grid" aria-label="Indicateurs admin">
-                <article class="panel stat"><span>Pré-inscriptions</span><strong id="stat-total">0</strong><p>Total enregistré</p></article>
-                <article class="panel stat"><span>CA potentiel</span><strong id="stat-revenue">0€</strong><p>Somme des plans choisis</p></article>
-                <article class="panel stat"><span>À traiter</span><strong id="stat-new">0</strong><p>Nouveaux dossiers</p></article>
-                <article class="panel stat"><span>Plan dominant</span><strong id="stat-plan">—</strong><p>Plan le plus fréquent</p></article>
-            </div>
-
             <div class="layout">
-                <article class="panel box">
-                    <h2>Utilisateurs inscrits</h2>
-                    <div class="toolbar" aria-label="Filtres inscriptions">
-                        <input id="search" type="search" placeholder="Rechercher nom, email, formation...">
-                        <select id="status-filter" aria-label="Filtrer par statut">
-                            <option value="all">Tous les statuts</option>
-                            <option value="Nouveau">Nouveau</option>
-                            <option value="Contacté">Contacté</option>
-                            <option value="Confirmé">Confirmé</option>
-                            <option value="Archivé">Archivé</option>
-                        </select>
-                    </div>
-                    <div class="table-wrap">
-                        <table class="table">
-                            <thead><tr><th>Utilisateur</th><th>Formation</th><th>Plan</th><th>Statut</th><th>Date</th></tr></thead>
-                            <tbody id="registrations-body"></tbody>
-                        </table>
-                    </div>
-                    <div class="empty hidden" id="empty-state">
-                        <p>Aucune pré-inscription persistée pour l'instant. Soumettez le formulaire public ou ajoutez un exemple.</p>
-                    </div>
-                    <p class="sync-note">💾 Persistance : les données restent disponibles après fermeture/réouverture de l'admin tant que le navigateur conserve son localStorage.</p>
-                </article>
-
-                <aside class="panel box" aria-label="Détail utilisateur admin">
-                    <h2>Détail utilisateur</h2>
-                    <div class="detail-grid" id="detail-panel">
-                        <div class="detail-item"><span>Sélection</span><strong>Choisissez une inscription dans le tableau.</strong></div>
-                    </div>
-                    <div class="detail-actions hidden" id="detail-actions">
-                        <label for="detail-status">Mettre à jour le statut
-                            <select id="detail-status">
-                                <option>Nouveau</option>
-                                <option>Contacté</option>
-                                <option>Confirmé</option>
-                                <option>Archivé</option>
-                            </select>
-                        </label>
-                        <label for="detail-note">Note admin persistée
-                            <textarea id="detail-note" placeholder="Ex. appeler lundi, envoyer devis, besoin premium..."></textarea>
-                        </label>
-                        <button class="btn" id="save-detail" type="button">Enregistrer le détail</button>
-                        <button class="btn btn-danger" id="delete-registration" type="button">Supprimer l'inscription</button>
-                    </div>
-                </aside>
+                <article class="panel box"><h2>Dernières inscriptions</h2><table class="table"><thead><tr><th>Nom</th><th>Formation</th><th>Plan</th><th>Statut</th></tr></thead><tbody><tr><td>Marie L.</td><td>Power Platform</td><td>Complet</td><td><span class="tag">Nouveau</span></td></tr><tr><td>Thomas R.</td><td>Power Automate</td><td>Premium</td><td><span class="tag">À rappeler</span></td></tr><tr><td>Sophie B.</td><td>Dynamics 365</td><td>Essentiel</td><td><span class="tag">Confirmé</span></td></tr></tbody></table></article>
+                <aside class="panel box"><h2>Actions rapides</h2><div class="actions"><div class="action">📤 Exporter les contacts CSV</div><div class="action">✍️ Modifier une page formation</div><div class="action">🎟️ Créer un coupon promo</div><div class="action">📧 Préparer une relance email</div></div></aside>
             </div>
         </div>
     </section>
@@ -308,6 +251,9 @@
         renderTable();
         showDetail(selectedRegistrationId);
     }
+    const loginView = document.querySelector('#login-view');
+    const adminView = document.querySelector('#admin-view');
+    const error = document.querySelector('#error');
 
     function unlock() {
         loginView.classList.add('hidden');
