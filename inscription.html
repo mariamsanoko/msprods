@@ -57,6 +57,7 @@
             <div class="field"><label for="goal">Objectif principal</label><textarea id="goal" name="goal" placeholder="Ex. automatiser mes validations internes, créer un mini CRM, préparer une certification..."></textarea></div>
             <label class="check"><input type="checkbox" required> <span>J'accepte d'être contacté pour finaliser mon inscription et recevoir les informations d'accès.</span></label>
             <button class="btn" type="submit">Valider ma pré-inscription</button>
+            <p class="success hidden" id="success-message">Pré-inscription enregistrée et visible dans le panneau admin caché. Les données persistent dans ce navigateur via localStorage.</p>
             <p class="success hidden" id="success-message">Pré-inscription enregistrée côté navigateur. Branchez ici votre CRM, Stripe ou outil d'emailing.</p>
         </form>
         <aside class="panel summary" aria-label="Récapitulatif">
@@ -86,6 +87,7 @@
         if (input) input.checked = true;
     }
 
+    const storageKey = 'academyRegistrations';
     const planLabels = { essentiel: 'Essentiel', complete: 'Complet', premium: 'Premium' };
     const formation = document.querySelector('#formation');
     if (requestedFormation && formationBySlug[requestedFormation]) {
@@ -107,10 +109,45 @@
     planInputs.forEach((input) => input.addEventListener('change', updateSummary));
     updateSummary();
 
+    function getRegistrations() {
+        return JSON.parse(localStorage.getItem(storageKey) || '[]');
+    }
+
+    function saveRegistration(registration) {
+        const registrations = getRegistrations();
+        registrations.unshift(registration);
+        localStorage.setItem(storageKey, JSON.stringify(registrations));
+    }
+
     document.querySelector('#registration-form').addEventListener('submit', (event) => {
         event.preventDefault();
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+        const selectedPlan = document.querySelector('input[name="plan"]:checked');
+        const registration = {
+            id: `REG-${Date.now()}`,
+            createdAt: new Date().toISOString(),
+            firstname: formData.get('firstname').trim(),
+            lastname: formData.get('lastname').trim(),
+            email: formData.get('email').trim(),
+            phone: formData.get('phone').trim(),
+            formation: formData.get('formation'),
+            plan: selectedPlan.value,
+            planLabel: planLabels[selectedPlan.value],
+            price: Number(selectedPlan.dataset.price),
+            level: formData.get('level'),
+            start: formData.get('start'),
+            goal: formData.get('goal').trim(),
+            status: 'Nouveau',
+            paymentStatus: 'À finaliser',
+            source: 'Page inscription'
+        };
+
+        saveRegistration(registration);
         document.querySelector('#success-message').classList.remove('hidden');
-        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        form.reset();
+        updateSummary();
+        form.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
 </script>
 </body>
