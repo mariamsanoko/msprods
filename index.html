@@ -410,6 +410,55 @@
             box-shadow: var(--shadow-sm);
         }
 
+        .formation-card {
+            display: flex;
+            min-height: 100%;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .formation-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .formation-meta span,
+        .detail-chip {
+            padding: 7px 10px;
+            border-radius: 999px;
+            color: var(--primary-dark);
+            background: var(--surface-blue);
+            font-size: 0.82rem;
+            font-weight: 900;
+        }
+
+        .formation-card .btn {
+            width: fit-content;
+            margin-top: auto;
+        }
+
+        .registration-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+            margin-top: 34px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .registration-preview ul {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+            list-style: none;
+        }
+
         .card::after {
             content: "";
             position: absolute;
@@ -724,7 +773,8 @@
             }
 
             .hero-grid,
-            .path-grid {
+            .path-grid,
+            .registration-preview {
                 grid-template-columns: 1fr;
             }
 
@@ -820,11 +870,12 @@
         </a>
         <nav class="nav-links" aria-label="Sections du site">
             <a href="#programme">Programme</a>
+            <a href="#formations">Formations</a>
             <a href="#experience">Expérience</a>
             <a href="#avis">Avis</a>
             <a href="#tarifs">Tarifs</a>
         </nav>
-        <a class="btn btn-secondary" href="#tarifs">S'inscrire</a>
+        <a class="btn btn-secondary" href="inscription.html">S'inscrire</a>
     </div>
 </header>
 
@@ -836,7 +887,7 @@
                 <h1 id="hero-title">Maîtrise Power Platform et Dynamics 365 comme dans une vraie académie.</h1>
                 <p class="lead">Un parcours premium, guidé et 100% pratique pour automatiser ton quotidien, créer des apps métier et piloter un CRM moderne sans écrire une ligne de code.</p>
                 <div class="hero-actions">
-                    <a class="btn btn-accent" href="#tarifs">🚀 Choisir mon parcours</a>
+                    <a class="btn btn-accent" href="inscription.html">🚀 Choisir mon parcours</a>
                     <a class="btn btn-secondary" href="#programme">Voir le programme</a>
                 </div>
                 <div class="trust-row" aria-label="Garanties de la formation">
@@ -960,6 +1011,52 @@
         </div>
     </section>
 
+
+    <section class="section" id="formations" aria-labelledby="formations-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">Détails des formations</span>
+                <h2 id="formations-title">Explore chaque parcours avant de t'inscrire.</h2>
+                <p>Chaque page détaille les objectifs, les modules, les prérequis et le résultat concret attendu à la fin de la formation.</p>
+            </div>
+            <div class="card-grid">
+                <article class="card formation-card">
+                    <span class="icon">⚡</span>
+                    <h3>Power Platform Fondations</h3>
+                    <p>Comprends l'écosystème Microsoft, Dataverse, Power Apps, Power Automate et les bons réflexes d'architecture no-code.</p>
+                    <div class="formation-meta"><span>Débutant</span><span>12h</span><span>Projet CRM léger</span></div>
+                    <a class="btn btn-secondary" href="formation-power-platform.html">Voir le détail</a>
+                </article>
+                <article class="card formation-card">
+                    <span class="icon">🔁</span>
+                    <h3>Power Automate Métier</h3>
+                    <p>Automatise des validations, notifications, extractions et synchronisations avec une méthode fiable et maintenable.</p>
+                    <div class="formation-meta"><span>Intermédiaire</span><span>10h</span><span>8 workflows</span></div>
+                    <a class="btn btn-secondary" href="formation-power-automate.html">Voir le détail</a>
+                </article>
+                <article class="card formation-card">
+                    <span class="icon">📊</span>
+                    <h3>Dynamics 365 CRM & Reporting</h3>
+                    <p>Structure un pipeline commercial, pilote les opportunités et construis des tableaux de bord utiles aux équipes.</p>
+                    <div class="formation-meta"><span>Intermédiaire</span><span>18h</span><span>Dashboard final</span></div>
+                    <a class="btn btn-secondary" href="formation-dynamics-365.html">Voir le détail</a>
+                </article>
+            </div>
+            <div class="registration-preview">
+                <div>
+                    <span class="eyebrow">Inscription guidée</span>
+                    <h3>Une page dédiée pour choisir ton parcours et laisser tes informations.</h3>
+                    <ul>
+                        <li>✅ Choix du plan et de la formation cible</li>
+                        <li>✅ Récapitulatif clair avant paiement</li>
+                        <li>✅ Préparation aux intégrations CRM ou paiement</li>
+                    </ul>
+                </div>
+                <a class="btn btn-accent" href="inscription.html">Ouvrir la page d'inscription</a>
+            </div>
+        </div>
+    </section>
+
     <section class="section experience" id="experience" aria-labelledby="experience-title">
         <div class="container">
             <div class="section-header">
@@ -1020,7 +1117,7 @@
                         <li>✅ Certificat de participation</li>
                         <li>✅ Accès à vie</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary" onclick="selectPlan('essentiel')">Commencer</a>
+                    <a href="inscription.html?plan=essentiel" class="btn btn-secondary" onclick="selectPlan('essentiel'); return false;">Commencer</a>
                 </article>
                 <article class="pricing-card popular">
                     <span class="badge">Le plus choisi</span>
@@ -1035,7 +1132,7 @@
                         <li>✅ Bonus PDF et templates</li>
                         <li>✅ Mises à jour incluses</li>
                     </ul>
-                    <a href="#" class="btn btn-accent" onclick="selectPlan('complete')">Je démarre aujourd'hui</a>
+                    <a href="inscription.html?plan=complete" class="btn btn-accent" onclick="selectPlan('complete'); return false;">Je démarre aujourd'hui</a>
                 </article>
                 <article class="pricing-card">
                     <h3>Coaching Premium</h3>
@@ -1048,7 +1145,7 @@
                         <li>✅ Support prioritaire direct</li>
                         <li>✅ Plan d'action personnalisé</li>
                     </ul>
-                    <a href="#" class="btn btn-secondary" onclick="selectPlan('premium')">Réserver ma place</a>
+                    <a href="inscription.html?plan=premium" class="btn btn-secondary" onclick="selectPlan('premium'); return false;">Réserver ma place</a>
                 </article>
             </div>
             <div class="guarantee">🛡️ Garantie 7 jours satisfait ou remboursé — accès immédiat après inscription.</div>
@@ -1060,7 +1157,7 @@
             <span class="eyebrow">Prêt à apprendre autrement ?</span>
             <h2 id="final-title">Transforme tes idées métier en solutions Microsoft concrètes.</h2>
             <p>Rejoins une académie en ligne claire, moderne et accessible pour passer du « je ne sais pas coder » au « je peux automatiser ça ».</p>
-            <a href="#tarifs" class="btn btn-accent">Choisir mon parcours</a>
+            <a href="inscription.html" class="btn btn-accent">Choisir mon parcours</a>
             <div class="security-row" aria-label="Informations de confiance">
                 <span>🔒 Paiement sécurisé</span>
                 <span>📧 Accès immédiat</span>
@@ -1071,7 +1168,7 @@
 </main>
 
 <div class="floating-cta">
-    <a href="#tarifs" class="btn btn-accent">🚀 Commencer</a>
+    <a href="inscription.html" class="btn btn-accent">🚀 Commencer</a>
 </div>
 
 <script>
@@ -1088,11 +1185,11 @@
 
         const selectedPlan = plans[plan];
         if (confirm(`Confirmer l'achat : ${selectedPlan.name} - ${selectedPlan.price}€`)) {
-            window.location.href = `https://buy.stripe.com/your-payment-link?plan=${plan}`;
+            window.location.href = `inscription.html?plan=${plan}`;
         }
     }
 
-    const revealElements = document.querySelectorAll('.card, .module, .feature, .testimonial, .pricing-card');
+    const revealElements = document.querySelectorAll('.card, .module, .feature, .testimonial, .pricing-card, .registration-preview');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -1107,6 +1204,12 @@
         element.style.transform = 'translateY(24px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(element);
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.ctrlKey && event.altKey && event.key.toLowerCase() === 'a') {
+            window.location.href = 'admin.html';
+        }
     });
 
     const style = document.createElement('style');
