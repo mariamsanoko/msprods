@@ -57,7 +57,6 @@
             <div class="field"><label for="goal">Objectif principal</label><textarea id="goal" name="goal" placeholder="Ex. automatiser mes validations internes, créer un mini CRM, préparer une certification..."></textarea></div>
             <label class="check"><input type="checkbox" required> <span>J'accepte d'être contacté pour finaliser mon inscription et recevoir les informations d'accès.</span></label>
             <button class="btn" type="submit">Valider ma pré-inscription</button>
-            <p class="success hidden" id="success-message">Pré-inscription enregistrée côté navigateur. Branchez ici votre CRM, Stripe ou outil d'emailing.</p>
         </form>
         <aside class="panel summary" aria-label="Récapitulatif">
             <span class="eyebrow">Récapitulatif</span>
@@ -109,8 +108,9 @@
 
     document.querySelector('#registration-form').addEventListener('submit', (event) => {
         event.preventDefault();
-        document.querySelector('#success-message').classList.remove('hidden');
-        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        event.currentTarget.reset();
+        updateSummary();
+        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 </script>
 </body>

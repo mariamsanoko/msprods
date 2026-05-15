@@ -1177,16 +1177,7 @@
     }
 
     function selectPlan(plan) {
-        const plans = {
-            essentiel: { price: 29, name: 'Accès Essentiel' },
-            complete: { price: 79, name: 'Formation Complète' },
-            premium: { price: 199, name: 'Coaching Premium' }
-        };
-
-        const selectedPlan = plans[plan];
-        if (confirm(`Confirmer l'achat : ${selectedPlan.name} - ${selectedPlan.price}€`)) {
-            window.location.href = `inscription.html?plan=${plan}`;
-        }
+        window.location.href = `inscription.html?plan=${plan}`;
     }
 
     const revealElements = document.querySelectorAll('.card, .module, .feature, .testimonial, .pricing-card, .registration-preview');
@@ -1206,11 +1197,6 @@
         observer.observe(element);
     });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.ctrlKey && event.altKey && event.key.toLowerCase() === 'a') {
-            window.location.href = 'admin.html';
-        }
-    });
 
     const style = document.createElement('style');
     style.textContent = '.is-visible { opacity: 1 !important; transform: translateY(0) !important; }';
