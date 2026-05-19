@@ -56,7 +56,7 @@
             </div>
             <div class="field"><label for="goal">Objectif principal</label><textarea id="goal" name="goal" placeholder="Ex. automatiser mes validations internes, créer un mini CRM, préparer une certification..."></textarea></div>
             <label class="check"><input type="checkbox" required> <span>J'accepte d'être contacté pour finaliser mon inscription et recevoir les informations d'accès.</span></label>
-            <button class="btn" type="submit">Valider ma pré-inscription</button>
+            <button class="btn" type="submit">Procéder au paiement sécurisé</button>
         </form>
         <aside class="panel summary" aria-label="Récapitulatif">
             <span class="eyebrow">Récapitulatif</span>
@@ -105,15 +105,12 @@
     planInputs.forEach((input) => input.addEventListener('change', updateSummary));
     updateSummary();
 
-    const TALLY_FORM_URL = 'https://tally.so/r/REPLACE_WITH_YOUR_TALLY_ID';
+    const TALLY_FORM_URL = 'https://tally.so/r/YOUR_TALLY_FORM_ID';
+    const STRIPE_CHECKOUT_URL = 'https://buy.stripe.com/YOUR_PAYMENT_LINK_ID';
+    const DASHBOARD_URL = 'https://www.msprods.fr/espace-prive.html';
 
     document.querySelector('#registration-form').addEventListener('submit', (event) => {
         event.preventDefault();
-
-        if (TALLY_FORM_URL.includes('REPLACE_WITH_YOUR_TALLY_ID')) {
-            alert('Ajoute ton URL Tally dans la constante TALLY_FORM_URL pour activer l'envoi.');
-            return;
-        }
 
         const formData = new FormData(event.currentTarget);
         const query = new URLSearchParams();
@@ -122,7 +119,21 @@
             query.append(key, value.toString());
         }
 
-        window.location.href = `${TALLY_FORM_URL}?${query.toString()}`;
+        const email = formData.get('email');
+        if (email) {
+            query.append('prefilled_email', email.toString());
+        }
+
+        const tallyUrl = `${TALLY_FORM_URL}?${query.toString()}`;
+        sessionStorage.setItem('pendingRegistration', tallyUrl);
+
+        const stripeQuery = new URLSearchParams();
+        stripeQuery.set('client_reference_id', `${formData.get('firstname') || ''}-${formData.get('lastname') || ''}`);
+        stripeQuery.set('prefilled_email', (email || '').toString());
+        stripeQuery.set('success_url', DASHBOARD_URL);
+        stripeQuery.set('cancel_url', 'https://www.msprods.fr/inscription.html');
+
+        window.location.href = `${STRIPE_CHECKOUT_URL}?${stripeQuery.toString()}`;
     });
 </script>
 </body>
