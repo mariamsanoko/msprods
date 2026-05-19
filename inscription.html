@@ -105,11 +105,24 @@
     planInputs.forEach((input) => input.addEventListener('change', updateSummary));
     updateSummary();
 
+    const TALLY_FORM_URL = 'https://tally.so/r/REPLACE_WITH_YOUR_TALLY_ID';
+
     document.querySelector('#registration-form').addEventListener('submit', (event) => {
         event.preventDefault();
-        event.currentTarget.reset();
-        updateSummary();
-        event.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (TALLY_FORM_URL.includes('REPLACE_WITH_YOUR_TALLY_ID')) {
+            alert('Ajoute ton URL Tally dans la constante TALLY_FORM_URL pour activer l'envoi.');
+            return;
+        }
+
+        const formData = new FormData(event.currentTarget);
+        const query = new URLSearchParams();
+
+        for (const [key, value] of formData.entries()) {
+            query.append(key, value.toString());
+        }
+
+        window.location.href = `${TALLY_FORM_URL}?${query.toString()}`;
     });
 </script>
 </body>
