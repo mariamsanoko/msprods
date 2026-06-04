@@ -17,7 +17,7 @@ Production-ready chatbot for [msprods.fr](https://www.msprods.fr) powered by Air
 - Quick buttons: `Formations`, `Prix`, `Parcours recommandé`.
 - Recommended path engine based on user intent and Airtable matches.
 - Optional lead capture: if a user sends an email and `AIRTABLE_LEADS_TABLE` is configured, the backend writes the lead to Airtable.
-- Backend-only API keys via `.env`.
+- Backend-only API keys via `.env` with Airtable SDK custom configuration.
 
 ## Architecture diagram
 
@@ -66,7 +66,8 @@ Fill in:
 OPENAI_API_KEY=sk-your-openai-key
 OPENAI_MODEL=gpt-4.1-mini
 AIRTABLE_API_KEY=pat-your-airtable-token
-AIRTABLE_BASE_ID=app-your-base-id
+AIRTABLE_ENDPOINT_URL=https://api.airtable.com
+AIRTABLE_BASE_ID=appjOZNBgGsu0P6cA
 AIRTABLE_FORMATIONS_TABLE=FORMATIONS
 AIRTABLE_FAQ_TABLE=FAQ
 AIRTABLE_PARCOURS_TABLE=PARCOURS
@@ -74,6 +75,21 @@ AIRTABLE_LEADS_TABLE=LEADS
 ```
 
 If your frontend is hosted on another origin, add it to `ALLOWED_ORIGINS`.
+
+### Airtable SDK connection
+
+The backend uses the official `airtable` Node.js package and configures it server-side with the MS Prods base ID:
+
+```js
+Airtable.configure({
+  endpointUrl: process.env.AIRTABLE_ENDPOINT_URL || 'https://api.airtable.com',
+  apiKey: process.env.AIRTABLE_API_KEY
+});
+
+const base = Airtable.base(process.env.AIRTABLE_BASE_ID || 'appjOZNBgGsu0P6cA');
+```
+
+Keep the personal access token in `.env` only. The default base is `appjOZNBgGsu0P6cA`, but you can override it with `AIRTABLE_BASE_ID`.
 
 ### 3. Run locally
 
