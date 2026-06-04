@@ -1,7 +1,7 @@
 import Airtable from 'airtable';
 
 const DEFAULT_AIRTABLE_ENDPOINT_URL = 'https://api.airtable.com';
-const DEFAULT_AIRTABLE_BASE_ID = 'appjOZNBgGsu0P6cA';
+const DEFAULT_AIRTABLE_BASE_ID = 'aappjOZNBgGsu0P6cA';
 const DEFAULT_TABLES = {
   formations: 'FORMATIONS',
   faq: 'FAQ',

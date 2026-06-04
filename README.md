@@ -67,7 +67,7 @@ OPENAI_API_KEY=sk-your-openai-key
 OPENAI_MODEL=gpt-4.1-mini
 AIRTABLE_API_KEY=pat-your-airtable-token
 AIRTABLE_ENDPOINT_URL=https://api.airtable.com
-AIRTABLE_BASE_ID=appjOZNBgGsu0P6cA
+AIRTABLE_BASE_ID=aappjOZNBgGsu0P6cA
 AIRTABLE_FORMATIONS_TABLE=FORMATIONS
 AIRTABLE_FAQ_TABLE=FAQ
 AIRTABLE_PARCOURS_TABLE=PARCOURS
@@ -86,10 +86,10 @@ Airtable.configure({
   apiKey: process.env.AIRTABLE_API_KEY
 });
 
-const base = Airtable.base(process.env.AIRTABLE_BASE_ID || 'appjOZNBgGsu0P6cA');
+const base = Airtable.base(process.env.AIRTABLE_BASE_ID || 'aappjOZNBgGsu0P6cA');
 ```
 
-Keep the personal access token in `.env` only. The default base is `appjOZNBgGsu0P6cA`, but you can override it with `AIRTABLE_BASE_ID`.
+Keep the personal access token in `.env` only. The default base is `aappjOZNBgGsu0P6cA`, but you can override it with `AIRTABLE_BASE_ID`.
 
 ### 3. Run locally
 
