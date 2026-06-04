@@ -1,6 +1,7 @@
 (() => {
   const STORAGE_KEY = 'msprods-airtable-brain-session';
   const API_URL = window.MSPRODS_CHAT_API_URL || '/chat';
+  const UNAVAILABLE_MESSAGE = 'Désolé, le conseiller IA est indisponible pour le moment. Prochaine étape : laisse ton email ou réessaie dans quelques instants.';
   const quickPrompts = {
     Formations: 'Quelles formations MS Prods correspondent à mon profil ?',
     Prix: 'Quels prix sont disponibles pour les formations ?',
@@ -50,6 +51,20 @@
     return wrapper;
   }
 
+  async function parseChatResponse(response) {
+    const contentType = response.headers.get('content-type') || '';
+
+    if (contentType.includes('application/json')) {
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || `Erreur chatbot ${response.status}`);
+      return data;
+    }
+
+    const body = await response.text();
+    const responseType = body.trim().startsWith('<') ? 'HTML' : 'non JSON';
+    throw new Error(`Réponse ${responseType} reçue depuis ${API_URL}. Vérifie que cette URL pointe vers le backend /chat.`);
+  }
+
   async function sendMessage(message, messages, input) {
     const content = message.trim();
     if (!content || state.isLoading) return;
@@ -68,8 +83,7 @@
         body: JSON.stringify({ message: content, history: state.history.slice(-8) })
       });
 
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Erreur chatbot');
+      const data = await parseChatResponse(response);
 
       typing.remove();
       const answer = data.answer || 'Je n’ai pas trouvé assez d’informations dans Airtable. Quel est ton objectif principal ?';
@@ -78,7 +92,8 @@
       saveHistory();
     } catch (error) {
       typing.remove();
-      renderMessage(messages, 'assistant', `Désolé, le conseiller IA est indisponible pour le moment. Prochaine étape : laisse ton email ou réessaie dans quelques instants. (${error.message})`);
+      console.error('MS Prods chat error:', error);
+      renderMessage(messages, 'assistant', UNAVAILABLE_MESSAGE);
     } finally {
       state.isLoading = false;
       input.focus();
