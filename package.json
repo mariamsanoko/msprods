@@ -1,13 +1,15 @@
 {
-  "name": "msprods-airtable-brain",
+  "name": "msprods-platform",
   "version": "1.0.0",
-  "description": "MS Prods Airtable Brain chatbot powered by Airtable and OpenAI Responses API.",
+  "description": "MS Prods SaaS platform with Next.js frontend, Express API, Airtable Brain, Stripe and protected dashboard.",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check src/airtable.js && node --check src/chat-service.js && node --check src/recommendation-engine.js && node --check public/chat-widget.js"
+    "start": "node apps/api/server.js",
+    "dev": "node --watch apps/api/server.js",
+    "dev:web": "next dev apps/web -p 3001",
+    "build:web": "next build apps/web",
+    "check": "node --check server.js && node --check apps/api/server.js && node --check apps/api/services/ai.service.js && node --check apps/api/services/airtable.service.js && node --check apps/api/services/recommendation.service.js && node --check apps/api/routes/auth.js && node --check apps/api/routes/chat.js && node --check apps/api/routes/stripe.js && node --check apps/api/routes/webhook-stripe.js && node --check apps/api/routes/access.js && node --check apps/api/middleware/auth.middleware.js && node --check security/jwt.js && node --check security/encryption.js && node --check security/webhooks-verification.js && node --check public/chat-widget.js"
   },
   "engines": {
     "node": ">=20"
@@ -19,6 +21,9 @@
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
