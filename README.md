@@ -1,4 +1,4 @@
-# MS Prods Airtable Brain
+# Ms Prods Airtable Brain
 
 Production-ready chatbot for [msprods.fr](https://www.msprods.fr) powered by Airtable (`MSPRODS_BRAIN`) and the OpenAI Responses API.
 
