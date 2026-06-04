@@ -1,4 +1,7 @@
-const AIRTABLE_API_URL = 'https://api.airtable.com/v0';
+import Airtable from 'airtable';
+
+const DEFAULT_AIRTABLE_ENDPOINT_URL = 'https://api.airtable.com';
+const DEFAULT_AIRTABLE_BASE_ID = 'appjOZNBgGsu0P6cA';
 const DEFAULT_TABLES = {
   formations: 'FORMATIONS',
   faq: 'FAQ',
@@ -8,10 +11,14 @@ const DEFAULT_TABLES = {
 const CACHE_TTL_MS = 5 * 60 * 1000;
 const cache = new Map();
 
+let configuredClientKey = '';
+let configuredBase;
+
 function getConfig() {
   return {
     apiKey: process.env.AIRTABLE_API_KEY,
-    baseId: process.env.AIRTABLE_BASE_ID,
+    endpointUrl: process.env.AIRTABLE_ENDPOINT_URL || DEFAULT_AIRTABLE_ENDPOINT_URL,
+    baseId: process.env.AIRTABLE_BASE_ID || DEFAULT_AIRTABLE_BASE_ID,
     tables: {
       formations: process.env.AIRTABLE_FORMATIONS_TABLE || DEFAULT_TABLES.formations,
       faq: process.env.AIRTABLE_FAQ_TABLE || DEFAULT_TABLES.faq,
@@ -25,6 +32,23 @@ function assertAirtableConfig({ apiKey, baseId }) {
   if (!apiKey || !baseId) {
     throw new Error('Airtable configuration is missing. Set AIRTABLE_API_KEY and AIRTABLE_BASE_ID.');
   }
+}
+
+function getAirtableBase() {
+  const { apiKey, endpointUrl, baseId } = getConfig();
+  assertAirtableConfig({ apiKey, baseId });
+
+  const clientKey = `${endpointUrl}:${apiKey}:${baseId}`;
+  if (configuredBase && configuredClientKey === clientKey) return configuredBase;
+
+  Airtable.configure({
+    endpointUrl,
+    apiKey
+  });
+
+  configuredClientKey = clientKey;
+  configuredBase = Airtable.base(baseId);
+  return configuredBase;
 }
 
 function normalizeText(value) {
@@ -71,27 +95,6 @@ function compactRecord(record) {
   };
 }
 
-async function airtableFetch(path, options = {}) {
-  const { apiKey, baseId } = getConfig();
-  assertAirtableConfig({ apiKey, baseId });
-
-  const response = await fetch(`${AIRTABLE_API_URL}/${baseId}/${path}`, {
-    ...options,
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      ...(options.headers || {})
-    }
-  });
-
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Airtable API error ${response.status}: ${body}`);
-  }
-
-  return response.json();
-}
-
 async function fetchTableRecords(tableName) {
   const cacheKey = `table:${tableName}`;
   const cached = cache.get(cacheKey);
@@ -99,20 +102,14 @@ async function fetchTableRecords(tableName) {
     return cached.records;
   }
 
-  const records = [];
-  let offset;
+  const base = getAirtableBase();
+  const records = await base(tableName)
+    .select({ pageSize: 100 })
+    .all();
+  const compactRecords = records.map(compactRecord);
 
-  do {
-    const params = new URLSearchParams({ pageSize: '100' });
-    if (offset) params.set('offset', offset);
-
-    const data = await airtableFetch(`${encodeURIComponent(tableName)}?${params.toString()}`);
-    records.push(...(data.records || []).map(compactRecord));
-    offset = data.offset;
-  } while (offset);
-
-  cache.set(cacheKey, { createdAt: Date.now(), records });
-  return records;
+  cache.set(cacheKey, { createdAt: Date.now(), records: compactRecords });
+  return compactRecords;
 }
 
 export async function searchKnowledgeBase(query, { limitPerTable = 3 } = {}) {
@@ -149,12 +146,8 @@ export async function captureLead({ email, name, message, recommendedPath }) {
 
   if (name) fields.Nom = name;
 
-  const data = await airtableFetch(encodeURIComponent(leadsTable), {
-    method: 'POST',
-    body: JSON.stringify({ records: [{ fields }] })
-  });
-
-  return { captured: true, id: data.records?.[0]?.id };
+  const createdRecords = await getAirtableBase()(leadsTable).create([{ fields }]);
+  return { captured: true, id: createdRecords[0]?.id };
 }
 
 export function formatContextForPrompt(results, recommendedPath) {
