@@ -1,13 +1,15 @@
 {
-  "name": "msprods-airtable-brain",
+  "name": "msprods-platform",
   "version": "1.0.0",
-  "description": "MS Prods Airtable Brain chatbot powered by Airtable and OpenAI Responses API.",
-  "main": "server.js",
+  "description": "MS Prods SaaS platform with web app, API, Airtable Brain, Stripe, Supabase security scaffolding.",
+  "main": "apps/api/server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "check": "node --check server.js && node --check src/airtable.js && node --check src/chat-service.js && node --check src/recommendation-engine.js && node --check public/chat-widget.js"
+    "start": "node apps/api/server.js",
+    "dev": "node --watch apps/api/server.js",
+    "legacy:start": "node server.js",
+    "legacy:dev": "node --watch server.js",
+    "check": "node --check server.js && find apps src security database -name \"*.js\" -not -path \"*/node_modules/*\" -print0 | xargs -0 -n1 node --check && node --check public/chat-widget.js"
   },
   "engines": {
     "node": ">=20"

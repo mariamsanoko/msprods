@@ -1,182 +1,80 @@
-# MS Prods Airtable Brain
+# MS Prods Platform
 
-Production-ready chatbot for [msprods.fr](https://www.msprods.fr) powered by Airtable (`MSPRODS_BRAIN`) and the OpenAI Responses API.
+Plateforme SaaS MS Prods pour `msprods.fr` : frontend public, espace privé protégé, coach IA connecté à Airtable, API Express, Stripe, Supabase/RLS et documentation sécurité.
 
-## Features
-
-- Floating HTML/CSS/JS chat widget on every site page.
-- `POST /chat` Node.js + Express endpoint.
-- Airtable-backed answers from:
-  - `FORMATIONS`
-  - `FAQ`
-  - `PARCOURS`
-- Top 3 keyword/semantic matches per table before every OpenAI call.
-- Strict French assistant prompt that prevents invented courses, prices, and durations.
-- Session memory in `localStorage`.
-- Typing/loading animation.
-- Quick buttons: `Formations`, `Prix`, `Parcours recommandé`.
-- Recommended path engine based on user intent and Airtable matches.
-- Optional lead capture: if a user sends an email and `AIRTABLE_LEADS_TABLE` is configured, the backend writes the lead to Airtable.
-- Backend-only API keys via `.env` with Airtable SDK custom configuration.
-
-## Architecture diagram
+## Arborescence cible
 
 ```text
-Browser / msprods.fr
-  └─ public/chat-widget.js + public/chat-widget.css
-      ├─ localStorage session memory
-      ├─ quick buttons + typing animation
-      └─ POST /chat { message, history }
-            ↓
-Node.js Express backend (server.js)
-  ├─ security: helmet, CORS, rate limit, JSON size limit
-  ├─ src/airtable.js
-  │   ├─ fetch FORMATIONS, FAQ, PARCOURS from Airtable
-  │   ├─ keyword relevance scoring
-  │   └─ optional LEADS capture
-  ├─ src/recommendation-engine.js
-  │   └─ recommended learning path signal engine
-  └─ src/chat-service.js
-      ├─ injects Airtable-only context
-      ├─ calls OpenAI Responses API
-      └─ returns concise French answer
-            ↓
-OpenAI model: gpt-4.1-mini
+apps/web      Frontend : landing, login, signup, dashboard, pricing, success/cancel
+apps/api      Backend : auth, chat IA, Stripe, webhooks, users, access, health
+database      Schéma Supabase, RLS, migrations et seed
+security      JWT, helpers crypto, vérification webhooks, rate-limit partagé
+infra         Notes de déploiement Stripe, Cloudflare, Vercel, Railway, env
+docs          Flows auth, Stripe, sécurité et architecture SaaS
 ```
 
-## Setup
+## Fonctionnalités
 
-### 1. Install dependencies
+- Landing et pages SaaS structurées dans `apps/web/app`.
+- Dashboard protégé avec sections formations, coach IA, billing et settings.
+- Composants frontend dédiés à l’auth, au dashboard, à l’IA et à Stripe.
+- API Express modulaire dans `apps/api`.
+- Réutilisation du chatbot Airtable Brain existant pour le coach IA.
+- Auth JWT, rate limiting, CORS, Helmet et gestion d’erreurs centralisée.
+- Checkout Stripe et webhook Stripe avec vérification de signature.
+- Schéma Supabase et policies RLS pour utilisateurs, abonnements et paiements.
+
+## Installation
 
 ```bash
 npm install
 ```
 
-### 2. Configure environment
-
-Copy `.env.example` to `.env`:
+Copier l’exemple d’environnement :
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in:
+Renseigner ensuite les clés OpenAI, Airtable, Supabase, JWT et Stripe.
 
-```dotenv
-OPENAI_API_KEY=sk-your-openai-key
-OPENAI_MODEL=gpt-4.1-mini
-AIRTABLE_API_KEY=pat-your-airtable-token
-AIRTABLE_ENDPOINT_URL=https://api.airtable.com
-AIRTABLE_BASE_ID=aappjOZNBgGsu0P6cA
-AIRTABLE_FORMATIONS_TABLE=FORMATIONS
-AIRTABLE_FAQ_TABLE=FAQ
-AIRTABLE_PARCOURS_TABLE=PARCOURS
-AIRTABLE_LEADS_TABLE=LEADS
-```
+## Développement
 
-If your frontend is hosted on another origin, add it to `ALLOWED_ORIGINS`.
-
-### Airtable SDK connection
-
-The backend uses the official `airtable` Node.js package and configures it server-side with the MS Prods base ID:
-
-```js
-Airtable.configure({
-  endpointUrl: process.env.AIRTABLE_ENDPOINT_URL || 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_API_KEY
-});
-
-const base = Airtable.base(process.env.AIRTABLE_BASE_ID || 'aappjOZNBgGsu0P6cA');
-```
-
-Keep the personal access token in `.env` only. The default base is `aappjOZNBgGsu0P6cA`, but you can override it with `AIRTABLE_BASE_ID`.
-
-### 3. Run locally
+Démarrer la nouvelle API plateforme :
 
 ```bash
 npm run dev
 ```
 
-Open:
-
-```text
-http://localhost:3000
-```
-
-Health check:
+Health check :
 
 ```bash
 curl http://localhost:3000/health
 ```
 
-### 4. Test the chat endpoint
+## Scripts
 
 ```bash
-curl -X POST http://localhost:3000/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message":"Je veux automatiser mes relances clients. Quelle formation recommandes-tu ?","history":[]}'
+npm start       # démarre apps/api/server.js
+npm run dev     # démarre apps/api/server.js en watch
+npm run check   # vérifie la syntaxe JS des dossiers platform + legacy
 ```
 
-## Airtable structure
+Les scripts `legacy:start` et `legacy:dev` restent disponibles pour l’ancien serveur racine `server.js`.
 
-The backend reads all fields from each configured table, so exact field names can evolve. Recommended fields:
+## Variables d’environnement principales
 
-### FORMATIONS
+- `OPENAI_API_KEY`, `OPENAI_MODEL`
+- `AIRTABLE_API_KEY`, `AIRTABLE_BASE_ID`, `AIRTABLE_FORMATIONS_TABLE`, `AIRTABLE_FAQ_TABLE`, `AIRTABLE_PARCOURS_TABLE`
+- `JWT_SECRET`
+- `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRO_PRICE_ID`, `STRIPE_ENTERPRISE_PRICE_ID`
+- `ALLOWED_ORIGINS`, `FRONTEND_URL`, `NEXT_PUBLIC_API_BASE_URL`
 
-- `Nom`
-- `Description`
-- `Objectifs`
-- `Niveau`
-- `Prix`
-- `Durée`
-- `URL`
-- `Tags`
+## Sécurité
 
-### FAQ
-
-- `Question`
-- `Réponse`
-- `Catégorie`
-- `Tags`
-
-### PARCOURS
-
-- `Nom`
-- `Profil cible`
-- `Objectif`
-- `Formations incluses`
-- `Ordre conseillé`
-- `Résultat attendu`
-
-### LEADS (optional)
-
-- `Email`
-- `Nom`
-- `Source`
-- `Message`
-- `Parcours recommande`
-- `Date`
-
-## Deployment notes
-
-- Keep `.env` and real API keys only on the backend server.
-- The frontend widget calls `/chat` by default. If the API is on another domain, define before loading the widget:
-
-```html
-<script>
-  window.MSPRODS_CHAT_API_URL = "https://api.msprods.fr/chat";
-</script>
-<script src="public/chat-widget.js" defer></script>
-```
-
-- Deploy Node.js with `npm start`.
-- Ensure HTTPS is enabled in production.
-- Configure `ALLOWED_ORIGINS` with `https://www.msprods.fr` and `https://msprods.fr`.
-
-## Security
-
-- Airtable and OpenAI keys never appear in the frontend.
-- Request body is limited to 32 KB.
-- Rate limit: 30 requests/minute per client IP.
-- CORS allowlist is configurable.
-- The system prompt instructs the assistant to use only injected Airtable records for factual claims.
+- Les secrets restent côté backend et ne doivent jamais être exposés dans `apps/web`.
+- Le middleware frontend redirige les routes `/dashboard/*` sans cookie de session.
+- Les routes privées API utilisent un JWT signé par `JWT_SECRET`.
+- Les webhooks Stripe sont validés avec `STRIPE_WEBHOOK_SECRET`.
+- Les tables Supabase disposent de policies RLS dans `database/rls-policies.sql`.
