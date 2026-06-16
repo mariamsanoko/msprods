@@ -1,11 +1,17 @@
 (() => {
   const STORAGE_KEY = 'msprods-airtable-brain-session';
-  const API_URL = window.MSPRODS_CHAT_API_URL || '/chat';
-  const UNAVAILABLE_MESSAGE = 'Désolé, le conseiller IA est indisponible pour le moment. Prochaine étape : laisse ton email ou réessaie dans quelques instants.';
+  const API_URL = window.MSPRODS_CHAT_API_URL || 'https://ms-brain.msprods.eu/api/chat';
+  let UNAVAILABLE_MESSAGE = 'Désolé, le conseiller IA est indisponible pour le moment. Prochaine étape : laisse ton email ou réessaie dans quelques instants.';
+
+  if (window.MSPRODS_CHAT_UNAVAILABLE_MESSAGE) {
+    UNAVAILABLE_MESSAGE = window.MSPRODS_CHAT_UNAVAILABLE_MESSAGE;
+  }
+  UNAVAILABLE_MESSAGE = 'Désolé, le conseiller IA est indisponible pour le moment. Prochaine étape : laisse ton email ou réessaie dans quelques instants.'; // User-friendly message for API errors
   const quickPrompts = {
     Formations: 'Quelles formations MS Prods correspondent à mon profil ?',
-    Prix: 'Quels prix sont disponibles pour les formations ?',
-    'Parcours recommandé': 'Peux-tu me recommander un parcours selon mon objectif ?'
+    Prix: 'Quels sont les prix disponibles pour les formations ?',
+    'Parcours-recommandé': 'Peux-tu me recommander un parcours selon mon objectif ?',
+    'Contact': 'Je souhaite être recontacté(e) par un conseiller.'
   };
 
   const state = {

@@ -10,6 +10,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { apiRateLimit } from './middleware/rateLimit.js';
 import { accessRouter } from './routes/access.js';
 import { authRouter } from './routes/auth.js';
+
 import { chatRouter } from './routes/chat.js';
 import { healthRouter } from './routes/health.js';
 import { stripeRouter } from './routes/stripe.js';
@@ -57,3 +58,4 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`MS Prods Platform API listening on http://localhost:${port}`);
 });
+

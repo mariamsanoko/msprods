@@ -1,8 +1,10 @@
 import { captureLead, formatContextForPrompt, searchKnowledgeBase } from './airtable.js';
 import { recommendPath } from './recommendation-engine.js';
 
-const OPENAI_API_URL = 'https://api.openai.com/v1/responses';
-const SYSTEM_PROMPT = `Tu es "MS Prods AI Brain Assistant".
+const API_URL =
+    window.MSPRODS_CHAT_API_URL ||
+    'https://msprods-api.onrender.com/chat';
+const SYSTEM_PROMPT = `Tu es "MS Prods AI Brain Assistant'
 
 Règles strictes :
 - Tu utilises UNIQUEMENT les données Airtable fournies dans le contexte pour les réponses factuelles.
